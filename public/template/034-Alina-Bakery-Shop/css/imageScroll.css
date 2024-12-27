@@ -1,0 +1,51 @@
+.imgScrollWrap {
+position: relative;
+width:1130px;
+height:40px;
+overflow: hidden;
+}
+
+.imgScrollBtn01, .imgScrollBtn02{
+position: absolute;
+display: block;
+width: 22px;
+height: 40px;
+background: url(../images/mainBG.png) no-repeat 0 0;
+overflow: hidden;
+z-index: 2;
+}
+
+.imgScrollBtn01{
+top: 40px;
+left: 0;
+}
+
+.imgScrollBtn02{
+top: 40px;
+right: 0;
+background-position: -22px 0;
+}
+
+.imgScrollBtn01:hover{
+background-position: 0 -40px;
+}
+
+.imgScrollBtn02:hover{
+background-position: -22px -40px;
+}
+
+.imgScrollList,{
+position: absolute;
+top: 0;
+left: 20px;
+width: 100%;
+height: 40px;
+line-height:0px;
+overflow: hidden;
+z-index: 1;
+}
+
+@media only screen and (max-width:767px){
+.imgScrollWrap{width:100%;}
+.imgScrollWrap{z-index:100; left:15px;}
+}

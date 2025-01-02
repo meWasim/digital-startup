@@ -11,13 +11,28 @@ class PageController extends Controller
     {
         return view('pages.aboutUs');
     }
-    public function blog()
+    public function blog(Request $request)
     {
-        $blogs=Blog::all();
+        $query = Blog::query();
 
-        return view('pages.blog',[
-            'blogs'=>$blogs
-        ]);
+    if ($request->filled('title')) {
+        $query->where('title', 'like', '%' . $request->title . '%');
+        
+    }
+
+    if ($request->filled('author')) {
+        $query->where('author', 'like', '%' . $request->author . '%');
+    }
+
+    if ($request->filled('date')) {
+        $query->whereDate('created_at', $request->date);
+    }
+
+    $blogs = $query->orderBy('id','desc')->get();
+
+    return view('pages.blog', [
+        'blogs' => $blogs
+    ]);
     }
     public function blogDetail($slug)
     {
@@ -25,7 +40,7 @@ class PageController extends Controller
         $blog = Blog::where('slug', $slug)->firstOrFail();
 
 
-        $popularBlogs = Blog::inRandomOrder()->take(5)->get();
+        $popularBlogs = Blog::inRandomOrder()->take(3)->get();
 
 
         return view('pages.blog-detail', compact('blog', 'popularBlogs'));

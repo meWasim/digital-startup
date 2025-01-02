@@ -22,15 +22,7 @@
 
 <section class="about-bg w-100 d-block py-md-5 py-3">
     <div class="container">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
 
         <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -41,7 +33,7 @@
 
             <div class="form-group">
                 <label for="content">Content</label>
-                <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+                <textarea name="content" id="content" class="form-control " rows="10"></textarea>
             </div>
 
             <div class="form-group">
@@ -54,8 +46,32 @@
     </div>
 </section>
 
-<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('content');
+    ClassicEditor
+        .create(document.querySelector('#content'), {
+
+            ckfinder: {
+                uploadUrl: "{{ route('blogs.uploadImage') }}?_token={{ csrf_token() }}"
+            },
+
+            toolbar: [
+                'undo', 'redo', '|', 'bold', 'italic', '|',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
+                'alignment', 'blockQuote', 'code', 'codeBlock', 'highlight', '|',
+                'heading', 'horizontalLine', 'link', 'numberedList', 'bulletedList', '|',
+                'imageUpload', 'insertTable', 'mediaEmbed', 'pageBreak', 'insertImage', '|',
+                'outdent', 'indent', 'ckfinder', 'textTransformation', 'sourceEditing'
+            ],
+            image: {
+                toolbar: [
+                    'imageTextAlternative', 'imageStyle:full', 'imageStyle:side'
+                ]
+            }
+        })
+        .catch(error => {
+            console.error('CKEditor error:', error);
+            alert('An error occurred. Check the console for details.');
+        });
 </script>
 @endsection

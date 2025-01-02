@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
-  
+
     public function index()
     {
         try {
@@ -117,5 +118,28 @@ class BlogController extends Controller
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
+    }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads/blogs', $filename, 'public');
+
+            $url = Storage::url($path);
+
+            return response()->json([
+                'uploaded' => true,
+                'url' => $url,
+            ]);
+        }
+
+        return response()->json([
+            'uploaded' => false,
+            'error' => [
+                'message' => 'No file uploaded.',
+            ],
+        ]);
     }
 }

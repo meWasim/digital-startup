@@ -21,7 +21,7 @@
         <!-- Filter Section -->
         <div class="row mb-4">
             <div class="col-md-12">
-                <form action="{{ route('blogs.index') }}" method="GET" class="form-inline">
+                <form action="{{ route('blog') }}" method="GET" class="form-inline">
                     <div class="form-group mr-3">
                         <label for="filterTitle" class="mr-2">Title</label>
                         <input type="text" name="title" id="filterTitle" value="{{ request('title') }}" class="form-control" placeholder="Enter title">
@@ -35,7 +35,7 @@
                         <input type="date" name="date" id="filterDate" value="{{ request('date') }}" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Filter</button>
-                    <a href="{{ route('blogs.index') }}" class="btn btn-secondary ml-2">Clear</a>
+                    <a href="{{ route('blog') }}" class="btn btn-secondary ml-2">Clear</a>
                 </form>
             </div>
         </div>

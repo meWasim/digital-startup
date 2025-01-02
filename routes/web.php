@@ -19,6 +19,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [PageController::class, 'aboutUs'])->name('about.us');
 Route::get('/blog', [PageController::class, 'blog'])->name('blog');
 Route::get('/blog-detail/{slug}', [PageController::class, 'blogDetail'])->name('blog.detail');
+Route::post('/blogs/uploadImage', [BlogController::class, 'uploadImage'])->name('blogs.uploadImage');
+
 
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact.us');
 

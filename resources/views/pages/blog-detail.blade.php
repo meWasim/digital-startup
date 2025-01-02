@@ -53,7 +53,8 @@
                         </li>
                     </ul>
                     <h2 class="d-block pb-3">{{ $blog->title }}</h2>
-                    <p class="d-block">{!! nl2br(e($blog->content)) !!}</p>
+                    <p class="d-block blog-content">   {!! $blog->content !!}</p>
+
                 </div>
             </div>
             <div class="col-md-4 col-sm-4">

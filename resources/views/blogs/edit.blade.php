@@ -48,9 +48,27 @@
         </form>
     </div>
 </section>
-
-<script src="https://cdn.ckeditor.com/4.25.0/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('content');
+    ClassicEditor
+        .create(document.querySelector('#content'), {
+            ckfinder: {
+                uploadUrl: "{{ route('blogs.uploadImage') }}?_token={{ csrf_token() }}"
+            },
+            toolbar: [
+                'heading', '|', 'bold', 'italic', 'link', '|',
+                'bulletedList', 'numberedList', '|', 'blockQuote', '|',
+                'insertTable', '|', 'imageUpload', '|', 'undo', 'redo'
+            ],
+            image: {
+                toolbar: [
+                    'imageTextAlternative', 'imageStyle:full', 'imageStyle:side'
+                ]
+            }
+        })
+        .catch(error => {
+            console.error('CKEditor error:', error);
+            alert('An error occurred. Check the console for details.');
+        });
 </script>
 @endsection

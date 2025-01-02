@@ -15,7 +15,7 @@ class UploadTemplatesCommand extends Command
     public function handle()
     {
         $zipPath = $this->argument('zipPath');
-
+//    ..check 
         // Ensure the ZIP file exists
         if (!file_exists($zipPath)) {
             $this->error("The specified ZIP file does not exist: $zipPath");

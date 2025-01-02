@@ -28,4 +28,28 @@ Route::middleware(['auth'])->group(function () {
     });
 
 });
-Route::get('template-preview/{templateFolder}', [TemplateController::class, 'preview'])->name('template.preview');
+// Route::get('template-preview/{templateFolder}', [TemplateController::class, 'preview'])->name('template.preview');
+
+// Route::get('thumbnails/{filename}', function ($filename) {
+//     $path = storage_path('app/public/thumbnails/' . $filename);
+
+//     if (!file_exists($path)) {
+//         abort(404);
+//     }
+//     Route::get('template-master/{folder}', function ($folder) {
+//         $path = public_path('templates-master/' . $folder);
+
+//         if (!File::isDirectory($path)) {
+//             abort(404, 'Folder not found.');
+//         }
+
+//         // Serve an index file or list the contents
+//         return redirect(asset('templates-master/' . $folder));
+//     });
+//     return response()->file($path);
+// });
+
+
+
+Route::get('/template-preview/{folder}', [TemplateController::class, 'preview'])->name('admin.templates.preview');
+

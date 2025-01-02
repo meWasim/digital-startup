@@ -41,6 +41,7 @@
                     <tbody>
                         @foreach ($templates as $template)
                             <tr>
+
                                 <td>{{ $template->name }}</td>
                                 <td><img src="{{ asset('storage/' . $template->thumbnail) }}" alt="{{ $template->name }}"
                                         width="100"></td>
@@ -57,10 +58,13 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm mr-2">Delete</button>
                                         </form>
-                                        <a href="template-master/001-robax-pest-control/" target="_blank"
-                                        
-                                        <a href="template-master/{{$template->folder}}" target="_blank"
-                                            class="btn btn-info btn-sm">Preview</a>
+                                        <a href="template-master/001-robax-pest-control/" target="_blank"></a>
+
+                                        {{-- <a href="template-master/{{$template->folder}}" target="_blank"
+                                            class="btn btn-info btn-sm">Preview</a> --}}
+                                            <a href="{{ url('template-preview/' . $template->folder) }}" target="_blank" class="btn btn-info btn-sm">Preview</a>
+
+
                                     </div>
                                 </td>
                             </tr>

@@ -18,62 +18,52 @@
 </section>
 <section class="blog-bg w-100 d-block py-md-5 py-3">
   <div class="container">
-        <div class="row mb-3">
-            <div class="col-md-6 col-sm-6">
-                 <div class="blog w-100">
-                     <div class="blogImg position-relative">
-                       <div class="blog-date position-absolute">
-                            <span>25</span>
-                            <dd>Sep 2024</dd>
-                       </div>
-                       <img src="images/blog-01.jpg" alt="">
-                     </div>
-                     <h2 class="d-block pt-5 pb-3">Behind Every Successful Business There Is A Well-Designed Website</h2>
-                     <p>Hiring a web designer to create your website is the best thing you can ever do for your business. A website will act as a window to your products and services. For any business, a website is a must. It’s […]<a href="blog-details.php" class="more-info ml-2">Read More</a></p>
-                 </div>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                 <div class="blog w-100">
-                     <div class="blogImg position-relative">
-                       <div class="blog-date position-absolute">
-                            <span>12</span>
-                            <dd>July 2024</dd>
-                       </div>
-                       <img src="images/blog-02.jpg" alt="">
-                     </div>
-                     <h2 class="d-block pt-5 pb-3">Remote Work Indeed Is The Future For The Business World</h2>
-                     <p>We are in the middle of what is arguably the most important event of our collective lifetime- an unprecedented nationwide lockdown meant to curb the spread of the virus. These twin developments will have repercussions for both our economy (as […]<a href="blog-details.php" class="more-info ml-2">Read More</a></p>
-                 </div>
+        <!-- Filter Section -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <form action="{{ route('blog') }}" method="GET" class="form-inline">
+                    <div class="form-group mr-3">
+                        <label for="filterTitle" class="mr-2">Title</label>
+                        <input type="text" name="title" id="filterTitle" value="{{ request('title') }}" class="form-control" placeholder="Enter title">
+                    </div>
+                    <div class="form-group mr-3">
+                        <label for="filterAuthor" class="mr-2">Author</label>
+                        <input type="text" name="author" id="filterAuthor" value="{{ request('author') }}" class="form-control" placeholder="Enter author">
+                    </div>
+                    <div class="form-group mr-3">
+                        <label for="filterDate" class="mr-2">Date</label>
+                        <input type="date" name="date" id="filterDate" value="{{ request('date') }}" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <a href="{{ route('blog') }}" class="btn btn-secondary ml-2">Clear</a>
+                </form>
             </div>
         </div>
+        <!-- Blogs List -->
         <div class="row">
-            <div class="col-md-6 col-sm-6">
+            @forelse($blogs as $blog)
+            <div class="col-md-6 col-sm-6 mb-4">
                  <div class="blog w-100">
                      <div class="blogImg position-relative">
                        <div class="blog-date position-absolute">
-                           <span>31</span>
-                           <dd>May 2024</dd>
+                            <span>{{ $blog->created_at->format('d') }}</span>
+                            <dd>{{ $blog->created_at->format('M Y') }}</dd>
                        </div>
-                       <img src="images/blog-03.jpg" alt="">
+                       <img src="{{ $blog->featured_image ? asset('storage/' . $blog->featured_image) : asset('images/default-blog.jpg') }}" alt="{{ $blog->title }}">
                      </div>
-                     <h2 class="d-block pt-5 pb-3">Facebook Ads Marketing Can Take Your Business Several Notches Higher</h2>
-                     <p>Without a doubt, Facebook is THE most popular and effective marketing platform with more than 2.7 billion active users across the globe. It would be silly to not leverage its advertising network that will give you marketing advantage every step […]<a href="blog-details.php" class="more-info ml-2">Read More</a></p>
-               </div>
-            </div>
-            <div class="col-md-6 col-sm-6">
-               <div class="blog w-100">
-                 <div class="blogImg position-relative">
-                   <div class="blog-date position-absolute">
-                     <span>26</span>
-                       <dd>Apr 2024</dd>
-                   </div>
-                       <img src="images/blog-04.jpg" alt="">
+                     <h2 class="d-block pt-5 pb-3">{{ $blog->title }}</h2>
+                     <p>
+                         {{ Str::limit(strip_tags($blog->content), 150) }}
+                         <a href="{{ route('blog.detail', $blog->slug) }}" class="more-info ml-2">Read More</a>
+                     </p>
                  </div>
-                   <h2 class="d-block pt-5 pb-3">Remote Work Indeed Is The Future For The Business World</h2>
-                   <p>We are in the middle of what is arguably the most important event of our collective lifetime- an unprecedented nationwide lockdown meant to curb the spread of the virus. These twin developments will have repercussions for both our economy (as […]<a href="blog-details.php" class="more-info ml-2">Read More</a></p>
-         </div>
-       </div>
-     </div>
+            </div>
+            @empty
+            <div class="col-12 text-center">
+                <p>No blogs available at the moment.</p>
+            </div>
+            @endforelse
+        </div>
  </div>
 </section>
 @endsection

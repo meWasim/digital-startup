@@ -43,7 +43,7 @@
                             <tr>
 
                                 <td>{{ $template->name }}</td>
-                                <td><img src="{{ asset('storage/' . $template->thumbnail) }}" alt="{{ $template->name }}"
+                                <td><img src="{{ asset($template->thumbnail) }}" alt="{{ $template->name }}"
                                         width="100"></td>
                                 <td>
                                     <div class="d-flex">

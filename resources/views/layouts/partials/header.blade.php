@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
 <section class="header-fixed">
     <div class="header-top-bg w-100 d-block pb-md-0 pb-3">
         <div class="container">
@@ -46,6 +47,7 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <a href="{{ route('cart.view') }}" class="btn btn-success">View Cart</a>
                             </div>
                         </div>
                     </nav>
@@ -75,6 +77,7 @@
                         <dd><i class="fa fa-user-o mr-md-1" aria-hidden="true"></i></dd>
                         <span>Login</span>
                     </a>
+
                     @endauth
                 </div>
             </div>

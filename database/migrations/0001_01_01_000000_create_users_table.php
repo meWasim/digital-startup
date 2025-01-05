@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('Fname'); // First Name
             $table->string('Lname'); // Last Name
+            $table->string('subdomain')->unique()->default('');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('registration_countrycode'); // Country Code
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-       
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

@@ -149,6 +149,13 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('contacts.index') }}" class="nav-link {{ request()->routeIs('contacts.index') ? 'active' : '' }}">
+                <i class="fa fa-envelope mr-2"></i>Messages
+            </a>
+        </li>
+
+
 
 
     </ul>

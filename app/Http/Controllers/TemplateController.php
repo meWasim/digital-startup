@@ -412,58 +412,64 @@ class TemplateController extends Controller
 
 // }
 
-public function update_user(Request $request, Template $template)
+
+public function update_user(Request $request, $templateId)
 {
-    $user = Auth::user();  // Get the authenticated user
+    $userId = auth()->id(); // Get the authenticated user's ID
 
-    // Handle image uploads and store the file path in the database
-    foreach ($request->input('sections', []) as $section => $content) {
-        // Check if there is an image upload for this section
-        if ($request->hasFile($section.'_image')) {
-            // Validate the image (you can add your own validation rules)
-            $image = $request->file($section.'_image');
-            $imagePath = $image->store('template_images', 'public');  // Save to public disk in the 'template_images' folder
+    // Validate the incoming request
+    $validated = $request->validate([
+        'sections.*.text' => 'nullable|string',
+        'sections.*.images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Limit size to 2MB
+    ]);
 
-            // Ensure content is a string and not an array
-            $content = is_array($content) ? implode(' ', $content) : $content;  // Convert array to string if needed
+    // Loop through each section from the request
+    foreach ($request->input('sections', []) as $sectionKey => $sectionData) {
+        // Fetch the existing section for the user and template
+        $existingSection = TemplateSection::where('user_id', $userId)
+            ->where('template_id', $templateId)
+            ->where('section_name', $sectionKey)
+            ->first();
 
-            // Store the image path along with any content
-            TemplateSection::updateOrCreate(
-                [
-                    'user_id' => $user->id,    // Ensure 'user_id' is included
-                    'template_id' => $template->id,
-                    'section_name' => $section
-                ],
-                [
-                    'content' => $content,
-                    'image' => $imagePath // Save image path
-                ]
-            );
+        $updatedImages = [];
+
+        // Handle uploaded images
+        if (isset($sectionData['images'])) {
+            foreach ($sectionData['images'] as $image) {
+                if ($image instanceof UploadedFile && $image->isValid()) {
+                    // Store the image in the 'public/uploads/sections' directory
+                    $path = $image->store('uploads/sections', 'public');
+                    $updatedImages[] = $path;
+                }
+            }
+        }
+
+        // Merge with existing images if updating
+        if ($existingSection && $existingSection->image) {
+            $existingImages = json_decode($existingSection->image, true) ?: [];
+            $updatedImages = array_merge($existingImages, $updatedImages);
+        }
+
+        // Update or create the section record
+        if ($existingSection) {
+            $existingSection->update([
+                'content' => $sectionData['text'] ?? $existingSection->content,
+                'image' => !empty($updatedImages) ? json_encode($updatedImages) : $existingSection->image,
+            ]);
         } else {
-            // If no image is uploaded, just save the text content
-            // Ensure content is a string
-            $content = is_array($content) ? implode(' ', $content) : $content;  // Convert array to string if needed
-
-            // Store only content
-            TemplateSection::updateOrCreate(
-                [
-                    'user_id' => $user->id,    // Ensure 'user_id' is included
-                    'template_id' => $template->id,
-                    'section_name' => $section
-                ],
-                [
-                    'content' => $content // Save only content if no image
-                ]
-            );
+            TemplateSection::create([
+                'user_id' => $userId,
+                'template_id' => $templateId,
+                'section_name' => $sectionKey,
+                'content' => $sectionData['text'] ?? null,
+                'image' => !empty($updatedImages) ? json_encode($updatedImages) : null,
+            ]);
         }
     }
 
-    // Redirect to the preview page after saving the customizations
-    return redirect()->route('user.template.preview', $user->subdomain);
+    // Reload the current page with a success message
+    return redirect()->back()->with('success', 'Template updated successfully!');
 }
-
-
-
 
 
 public function showUserTemplate($subdomain, $templateId)

@@ -64,7 +64,7 @@
 
 
 </style>
-<div id="banner" class="banner-container">
+{{-- <div id="banner" class="banner-container">
     <div class="banner-content">
         <h2>Welcome! Please fill out the form below.</h2>
         <p>To continue using our services, we need some basic information from you.</p>
@@ -74,9 +74,9 @@
             <input type="text" id="contact" name="contact" placeholder="Contact Number" required>
             <button type="submit">Submit</button>
         </form>
-       
+
     </div>
-</div>
+</div> --}}
 
 <footer class="red-bg w-100 d-block pt-3 pb-md-5 py-2">
      <div class="container">
@@ -326,7 +326,7 @@
   </div>
 </div>
 <!---------End model popup----------->
-<script>
+{{-- <script>
  $(document).ready(function() {
     // Initially hide the banner
     $('.banner-container').hide();
@@ -350,4 +350,4 @@
     });
 });
 
-</script>
+</script> --}}

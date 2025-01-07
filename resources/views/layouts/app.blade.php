@@ -23,9 +23,19 @@
 
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
 
+ <!-- jQuery CDN -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ <!-- SweetAlert2 CSS -->
+ <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.16/dist/sweetalert2.min.css" rel="stylesheet">
+
+ <!-- SweetAlert2 JS -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.16/dist/sweetalert2.all.min.js"></script>
 
     @stack('styles')
 </head>
+
+
 
 <body>
     <div id="wrapper">
@@ -50,6 +60,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -184,6 +196,59 @@
         });
     </script>
     <!-- DataTables JS -->
+    <script>
+        $(document).ready(function() {
+                        // Check if the user has already filled the form
+            if (!localStorage.getItem('userName')) {
+                // If not, show the banner
+                $('#banner').show();
+            } else {
+                // If already filled, show success message or proceed with site content
+                var userName = localStorage.getItem('userName');
+                $('#success-message').text('Welcome back, ' + userName).show();
+                setTimeout(function() {
+                    $('#success-message').fadeOut();
+                }, 3000); // Hide success message after 3 seconds
+            }
+
+            // When the user clicks "Fill Form"
+            $('#fillFormBtn').click(function() {
+                $('#banner').hide(); // Hide the banner
+                $('#form-container').show(); // Show the form
+            });
+
+            // Handle form submission
+            $('#accessForm').submit(function(event) {
+                event.preventDefault();
+
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var errorMessage = $('#error-message');
+                var successMessage = $('#success-message');
+
+                // Validate form fields
+                if (name && email) {
+                    // Save data in localStorage
+                    localStorage.setItem('userName', name);
+                    localStorage.setItem('userEmail', email);
+
+                    // Hide the form and show the success message
+                    $('#form-container').hide();
+                    successMessage.text('Thank you for filling out the form! You now have access.').show();
+
+                    // Allow access after 3 seconds
+                    setTimeout(function() {
+                        successMessage.fadeOut();
+                        // You can add logic here to allow user to access the site
+                    }, 3000);
+
+                } else {
+                    // Show error message if fields are not filled
+                    errorMessage.show();
+                }
+            });
+        });
+    </script>
 
     @stack('scripts')
 </body>

@@ -1204,7 +1204,7 @@ ul.footer-link li ul li a:hover {
 
 .webTemp img {
   width: 100%;
-  height: 100%;
+  height: 55%;
   display: block;
   object-fit: cover;
 }

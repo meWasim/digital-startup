@@ -4,10 +4,10 @@
 <title>GK Telemarketing</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/imageScroll.css">
+<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/css/font-awesome.css">
+<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/css/style.css">
+<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/css/imageScroll.css">
 </head>
 <body>	
 <!---------Start header section----------->
@@ -52,11 +52,11 @@
 <?php include("include/footer.php"); ?>
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/ImageScroll.js"></script>
-<script src="js/img-scroll.js"></script>
+<script src="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/js/jquery.min.js"></script>
+<script src="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/js/popper.min.js"></script>
+<script src="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/js/bootstrap.min.js"></script>
+<script src="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/js/ImageScroll.js"></script>
+<script src="http://127.0.0.1:8000/templates-master/013-GK-Telemarketing/js/img-scroll.js"></script>
 <script type="text/javascript">
   $('.clint').imageScroll({
     orientation:"left",

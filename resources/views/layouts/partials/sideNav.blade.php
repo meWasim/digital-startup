@@ -113,12 +113,15 @@
                 id="managementSubmenu">
                 <ul class="list-unstyled ps-3">
                     <!-- Role Management -->
+                    @can('view-roles')
                     <li>
                         <a href="{{ route('roles.index') }}"
                             class="nav-link {{ request()->routeIs('roles.*') ? 'active bg-primary text-white' : '' }}">
                             <i class="fa fa-user-circle mr-2"></i>Role Management
                         </a>
                     </li>
+                    @endcan
+
                     <!-- User Management -->
                     <li>
                         <a href="user-management.php" class="nav-link">
@@ -149,11 +152,14 @@
                 </ul>
             </div>
         </li>
+        @can('contact')
         <li class="nav-item">
             <a href="{{ route('contacts.index') }}" class="nav-link {{ request()->routeIs('contacts.index') ? 'active' : '' }}">
                 <i class="fa fa-envelope mr-2"></i>Messages
             </a>
         </li>
+        @endcan
+
 
 
 

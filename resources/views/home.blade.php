@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="chse-tmpl w-100 d-block text-center pb-md-3">Choose a Free Stunning Template</div>
 
-                @foreach($templates as $template)
+                @forelse($templates as $template)
                     <div class="col-md-3 col-sm-3 p-md-3 pl-2 pr-3 pt-0 pb-1">
                         <div class="webImg">
                             <div class="webTemp position-relative">
@@ -35,7 +35,14 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                <div class="col-md-3 col-sm-3 p-md-3 pl-2 pr-3 pt-0 pb-1">
+                    No template available
+                </div>
+                @endforelse
+
+
+
             </div>
 
             {{-- <div class="col-md-12 col-sm-12">

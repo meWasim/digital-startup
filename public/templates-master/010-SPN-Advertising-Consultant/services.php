@@ -4,9 +4,9 @@
 <title>SPN Advertising Consultant- Services</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/010-SPN-Advertising-Consultant/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/010-SPN-Advertising-Consultant/css/font-awesome.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/010-SPN-Advertising-Consultant/css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/010-SPN-Advertising-Consultant/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/010-SPN-Advertising-Consultant/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/010-SPN-Advertising-Consultant/css/style1.css">
 </head>
 <body>
 <!---------Start header section----------->
@@ -24,10 +24,10 @@
 
 <!---------End footer section-------->
 
-<script src="http://127.0.0.1:8000/templates-master/010-SPN-Advertising-Consultant/js/jquery.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/010-SPN-Advertising-Consultant/js/popper.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/010-SPN-Advertising-Consultant/js/bootstrap.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/010-SPN-Advertising-Consultant/js/jquery.fancybox.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/010-SPN-Advertising-Consultant/js/custom.js"></script>
+<script src="http://localhost/templates-master/010-SPN-Advertising-Consultant/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/010-SPN-Advertising-Consultant/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/010-SPN-Advertising-Consultant/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/010-SPN-Advertising-Consultant/js/jquery.fancybox.min.js"></script>
+<script src="http://localhost/templates-master/010-SPN-Advertising-Consultant/js/custom.js"></script>
 </body>
 </html> 

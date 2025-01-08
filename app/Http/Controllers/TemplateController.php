@@ -367,12 +367,12 @@ class TemplateController extends Controller
     $template = Template::findOrFail($templateId);
 
     // Retrieve existing template sections
-    $templateSections = TemplateSection::where('template_id', $templateId)
-                                        ->pluck('content', 'section_name')
-                                        ->toArray();
+    $sections = TemplateSection::where('template_id', $templateId)
+                                        ->pluck('content', 'section_name');
 
-    return view('templates.edit_user', compact('template', 'templateSections'));
+    return view('templates.edit_user', compact('template', 'sections'));
 }
+
 
 
 // public function update_user(Request $request, $templateId)
@@ -415,60 +415,35 @@ class TemplateController extends Controller
 
 public function update_user(Request $request, $templateId)
 {
-    $userId = auth()->id(); // Get the authenticated user's ID
-
-    // Validate the incoming request
+    // Validate the CKEditor inputs
     $validated = $request->validate([
-        'sections.*.text' => 'nullable|string',
-        'sections.*.images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Limit size to 2MB
+        'editor-about-us' => 'nullable|string',
+        'editor-services' => 'nullable|string',
+        'editor-blog' => 'nullable|string',
+        'editor-contact-us' => 'nullable|string',
     ]);
 
-    // Loop through each section from the request
-    foreach ($request->input('sections', []) as $sectionKey => $sectionData) {
-        // Fetch the existing section for the user and template
-        $existingSection = TemplateSection::where('user_id', $userId)
-            ->where('template_id', $templateId)
-            ->where('section_name', $sectionKey)
-            ->first();
+    // Section names
+    $sections = [
+        'about-us' => $validated['editor-about-us'] ?? '',
+        'services' => $validated['editor-services'] ?? '',
+        'blog' => $validated['editor-blog'] ?? '',
+        'contact-us' => $validated['editor-contact-us'] ?? '',
+    ];
 
-        $updatedImages = [];
+    // Fetch the Template instance using the provided templateId
+    $template = Template::findOrFail($templateId);
 
-        // Handle uploaded images
-        if (isset($sectionData['images'])) {
-            foreach ($sectionData['images'] as $image) {
-                if ($image instanceof UploadedFile && $image->isValid()) {
-                    // Store the image in the 'public/uploads/sections' directory
-                    $path = $image->store('uploads/sections', 'public');
-                    $updatedImages[] = $path;
-                }
-            }
-        }
-
-        // Merge with existing images if updating
-        if ($existingSection && $existingSection->image) {
-            $existingImages = json_decode($existingSection->image, true) ?: [];
-            $updatedImages = array_merge($existingImages, $updatedImages);
-        }
-
-        // Update or create the section record
-        if ($existingSection) {
-            $existingSection->update([
-                'content' => $sectionData['text'] ?? $existingSection->content,
-                'image' => !empty($updatedImages) ? json_encode($updatedImages) : $existingSection->image,
-            ]);
-        } else {
-            TemplateSection::create([
-                'user_id' => $userId,
-                'template_id' => $templateId,
-                'section_name' => $sectionKey,
-                'content' => $sectionData['text'] ?? null,
-                'image' => !empty($updatedImages) ? json_encode($updatedImages) : null,
-            ]);
-        }
+    // Save each section in the TemplateSection model
+    foreach ($sections as $sectionName => $content) {
+        TemplateSection::updateOrCreate(
+            ['template_id' => $template->id, 'section_name' => $sectionName],
+            ['content' => $content]
+        );
     }
 
-    // Reload the current page with a success message
-    return redirect()->back()->with('success', 'Template updated successfully!');
+    // Redirect with a success message
+    return redirect()->route('cart.view')->with('success', 'Template sections updated successfully!');
 }
 
 

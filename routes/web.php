@@ -61,6 +61,7 @@ Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.ad
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::get('/template/{template}/edit', [TemplateController::class, 'edit_template'])->name('template.edit');
 Route::post('/update-template/{template}', [TemplateController::class, 'update_user'])->name('template_section.update');
+Route::get('user/template-preview/{folder}', [CartController::class, 'preview'])->name('user.templates.preview');
 Route::domain('{subdomain}.digitalStartups.com')->group(function () {
     Route::get('/', [TemplateController::class, 'showUserTemplate'])->name('user.template.preview');
 });

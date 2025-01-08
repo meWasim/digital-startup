@@ -17,7 +17,7 @@
                             ₹ Free</div>
                     </div>
                     <div class="web-demo w-100 d-block text-right position-absolute pr-3">
-                        <a href="{{ url('template-preview/' . $template->folder) }}" target="_blank" class="btn btn-info btn-sm">Preview</a>
+                        <a href="{{ url('user/template-preview/' . $template->folder) }}" target="_blank" class="btn btn-info btn-sm">Preview</a>
                         <a href="{{ route('template.edit', $template->id) }}" class="btn btn-warning ml-2">Edit</a>
 
                     </div>

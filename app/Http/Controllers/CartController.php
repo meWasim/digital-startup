@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function addToCart(Request $request)
     {
         $userId = auth()->id(); // Get the authenticated user ID
@@ -36,6 +41,9 @@ class CartController extends Controller
 
 public function viewCart()
 {
+    if (!auth()->user()->can('cart')) {
+        return redirect()->back()->with('error', 'Permission denied');
+    }
     // Fetch all cart items for the authenticated user
     $userId = auth()->id();
     $cartItems = Cart::where('user_id', $userId)->get();

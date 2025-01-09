@@ -8,11 +8,11 @@
 		 	   <div class="col-md-4 col-sm-4">
 		 	   	    <h3 class="d-block pb-2 mb-3">Useful Links</h3>
 		 	   	    <ul class="usf-link pl-0">
-		 	   	    	<li class="pb-1"><a href="http://127.0.0.1:8000/templates-master/063-Marino-Cleaning-Services/index.php">Home</a></li>
-		 	   	    	<li class="pb-1"><a href="http://127.0.0.1:8000/templates-master/063-Marino-Cleaning-Services/about-us.php">About Us</a></li>
-		 	   	    	<li class="pb-1"><a href="http://127.0.0.1:8000/templates-master/063-Marino-Cleaning-Services/services.php">Service</a></li>
-		 	   	    	<li class="pb-1"><a href="http://127.0.0.1:8000/templates-master/063-Marino-Cleaning-Services/blog.php">Blog</a></li>
-		 	   	    	<li class="pb-1"><a href="http://127.0.0.1:8000/templates-master/063-Marino-Cleaning-Services/contact-us.php">Contact Us</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/063-Marino-Cleaning-Services/index.php">Home</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/063-Marino-Cleaning-Services/about-us.php">About Us</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/063-Marino-Cleaning-Services/services.php">Service</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/063-Marino-Cleaning-Services/blog.php">Blog</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/063-Marino-Cleaning-Services/contact-us.php">Contact Us</a></li>
 		 	   	    </ul>
 		 	   </div>
 		 	   <div class="col-md-4 col-sm-4">

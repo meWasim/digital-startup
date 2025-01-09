@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
     Blog::factory()->count(10)->create();
-
+    $this->call(UserWithRoleSeeder::class);
     }
 }

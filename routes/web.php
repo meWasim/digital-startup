@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RoleController;
 use  App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\PermissionController;
 
@@ -28,11 +29,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('permissions', PermissionController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('blogs', BlogController::class);
+
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('templates', TemplateController::class);
     });
 
 });
+Route::resource('contacts', ContactController::class);
+Route::get('template-preview/{templateFolder}', [TemplateController::class, 'preview'])->name('template.preview');
 // Route::get('template-preview/{templateFolder}', [TemplateController::class, 'preview'])->name('template.preview');
 
 // Route::get('thumbnails/{filename}', function ($filename) {

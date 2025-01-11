@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Footer;
+use App\Models\AboutUs;
+use App\Models\Contact;
+use App\Models\Feature;
+use App\Models\Service;
 use App\Models\Template;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+
 class CartController extends Controller
 {
     public function addToCart(Request $request)
@@ -246,59 +253,76 @@ protected function makeContactUsDynamic($destinationPath)
 
     if (File::exists($contactUsPath)) {
         // Replace static content with dynamic placeholders
-        $dynamicContent = '
-        <div class="container py-md-3">
-            <div class="row">
-                <h2 class="page-header w-100 d-block text-center pb-3"><?= $content["title"] ?? "Contact Us"; ?></h2>
-            </div>
-            <div class="row contact-bg py-md-4 px-md-5 pl-2 py-3 mb-md-4">
-                <div class="col-md-6 col-sm-6 pl-0">
-                    <h3 class="d-block text-center pb-2"><?= $content["company_name"] ?? "Your Company Name"; ?></h3>
-                    <p class="d-block text-center mb-1" style="font-size:17px;"><b>CIN No:</b> <?= $content["cin_no"] ?? "Default CIN"; ?></p>
-                    <p class="d-block text-center mb-1" style="font-size:17px;"><b>Registration No:</b> <?= $content["registration_no"] ?? "Default Reg No"; ?></p>
-                    <p class="d-block text-center mb-1"><i class="fa fa-map-marker mr-2" aria-hidden="true"></i><?= $content["address"] ?? "Your Address"; ?></p>
-                    <p class="d-block text-center mb-1"><i class="fa fa-envelope-o mr-2" aria-hidden="true"></i><a href="mailto:<?= $content["email"] ?? "info@yourdomain.com"; ?>"><?= $content["email"] ?? "info@yourdomain.com"; ?></a></p>
-                    <p class="d-block text-center mb-4"><i class="fa fa-phone mr-2" aria-hidden="true"></i><a href="tel:<?= $content["phone"] ?? "+91 0000000000"; ?>"><?= $content["phone"] ?? "+91 0000000000"; ?></a></p>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="row map-bdr p-2">
-                            <iframe src="<?= $content["map_embed_url"] ?? "https://maps.google.com"; ?>" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6 pl-md-2 pl-0 ftr-frm">
-                    <form action="<?= $content["form_action"] ?? "/submit-contact"; ?>" method="POST">
-                        <div class="form-group mb-2">
-                            <label for="usr">Name *</label>
-                            <input type="text" class="form-control form-filed" name="name" placeholder="Enter your name" required>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control form-filed" name="address" placeholder="Enter your address">
-                        </div>
-                        <div class="form-group form-md mb-2">
-                            <label for="email">Email *</label>
-                            <input type="email" class="form-control form-filed" name="email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group form-md mb-2">
-                            <label for="phone">Phone</label>
-                            <input type="text" class="form-control form-filed" name="phone" placeholder="Enter your phone number">
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="subject">Subject</label>
-                            <input type="text" class="form-control form-filed" name="subject" placeholder="Type the subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea class="form-control textarea" rows="4" name="message" placeholder="Type your message here"></textarea>
-                        </div>
-                        <button type="submit" class="btn subBtn">Submit</button>
-                    </form>
+        $dynamicContent = <<<PHP
+<div class="container py-md-3">
+    <div class="row">
+        <h2 class="page-header w-100 d-block text-center pb-3"><?php echo htmlspecialchars(\$contact->title ?? 'Contact Us'); ?></h2>
+    </div>
+    <div class="row contact-bg py-md-4 px-md-5 pl-2 py-3 mb-md-4">
+        <div class="col-md-6 col-sm-6 pl-0">
+            <h3 class="d-block text-center pb-2"><?php echo htmlspecialchars(\$contact->company_name ?? 'Your Company Name'); ?></h3>
+            <p class="d-block text-center mb-1" style="font-size:17px;">
+                <b>CIN No:</b> <?php echo htmlspecialchars(\$contact->cin_no ?? 'Default CIN'); ?>
+            </p>
+            <p class="d-block text-center mb-1" style="font-size:17px;">
+                <b>Registration No:</b> <?php echo htmlspecialchars(\$contact->registration_no ?? 'Default Reg No'); ?>
+            </p>
+            <p class="d-block text-center mb-1">
+                <i class="fa fa-map-marker mr-2" aria-hidden="true"></i><?php echo htmlspecialchars(\$contact->address ?? 'Your Address'); ?>
+            </p>
+            <p class="d-block text-center mb-1">
+                <i class="fa fa-envelope-o mr-2" aria-hidden="true"></i>
+                <a href="mailto:<?php echo htmlspecialchars(\$contact->email ?? 'info@yourdomain.com'); ?>"><?php echo htmlspecialchars(\$contact->email ?? 'info@yourdomain.com'); ?></a>
+            </p>
+            <p class="d-block text-center mb-4">
+                <i class="fa fa-phone mr-2" aria-hidden="true"></i>
+                <a href="tel:<?php echo htmlspecialchars(\$contact->phone ?? '+91 0000000000'); ?>"><?php echo htmlspecialchars(\$contact->phone ?? '+91 0000000000'); ?></a>
+            </p>
+            <div class="col-md-12 col-sm-12">
+                <div class="row map-bdr p-2">
+                    <iframe src="<?php echo htmlspecialchars(\$contact->map_embed_url ?? 'https://maps.google.com'); ?>" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
-        </div>';
+        </div>
+        <div class="col-md-6 col-sm-6 pl-md-2 pl-0 ftr-frm">
+
+            <form action="<?php echo htmlspecialchars(\$formAction ?? '/contact-submit'); ?>" method="POST">
+
+                <div class="form-group mb-2">
+                    <label for="usr">Name *</label>
+                    <input type="text" class="form-control form-filed" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control form-filed" name="address" placeholder="Enter your address">
+                </div>
+                <div class="form-group form-md mb-2">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control form-filed" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group form-md mb-2">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control form-filed" name="phone" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control form-filed" name="subject" placeholder="Type the subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control textarea" rows="4" name="message" placeholder="Type your message here"></textarea>
+                </div>
+                <button type="submit" class="btn subBtn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+PHP;
 
         // Write the dynamic content back to the file
-        File::put($contactUsPath, $dynamicContent);
+        if (!File::put($contactUsPath, $dynamicContent)) {
+            throw new \Exception("Failed to write to $contactUsPath.");
+        }
     } else {
         throw new \Exception("contact-us.php not found in $destinationPath/include.");
     }
@@ -433,23 +457,115 @@ public function viewCart()
     return view('cart.index', compact('templates'));
 }
 
-
 public function preview($templateFolder)
+{
+    // Construct the path to the template's index.php file
+    $filePath = public_path('templates-user/' . $templateFolder . '/index.php');
 
-    {
-
-        // Construct the path to the template's index.php file
-        $filePath = public_path('templates-user/' . $templateFolder . '/index.php');
-
-        if (!file_exists($filePath)) {
-            // Return the file to the browser
-            return abort(404,'Template not found');
-        }
-        ob_start();
-        include $filePath;
-        $output = ob_get_clean();
-        return response($output);
-        $output = ob_get_clean();
+    if (!file_exists($filePath)) {
+        return abort(404, 'Template not found');
     }
+
+    // Fetch the authenticated user's ID
+    $userId = auth()->id();
+
+    // Fetch the template record for the given folder
+    $template = Template::where('folder', $templateFolder)->first();
+
+    if (!$template) {
+        return abort(404, 'Template not found in database');
+    }
+
+    // Fetch About Us data for the given user and template
+    $aboutUs = AboutUs::where('user_id', $userId)
+        ->where('template_id', $template->id)
+        ->first();
+    $services = Service::where('user_id', $userId)->where('template_id', $template->id)->get();
+    $testimonials = Testimonial::where('user_id', $userId)->where('template_id', $template->id)->get();
+    $feature = Feature::where('user_id', $userId)->where('template_id', $template->id)->get();
+    $contact = Contact::where('user_id', $userId)->where('template_id', $template->id)->first();
+    $footer = Footer::where('user_id', $userId)->where('template_id', $template->id)->first();
+
+
+
+    $usefulLinks = $footer ? json_decode($footer->useful_links, true) : [];
+    $socialLinks = $footer ? json_decode($footer->social_links, true) : [];
+    // Prepare content array
+    $content = [
+        'our_story' => $aboutUs->our_story ?? 'Default story content',
+        'mission' => $aboutUs->mission ?? 'Default mission content',
+        'vision' => $aboutUs->vision ?? 'Default vision content',
+        // 'image_url' => $aboutUs && $aboutUs->image_path
+        //     ? asset('storage/' . $aboutUs->image_path)
+        //     : '/default-image.jpg',
+        'image_url'=> $aboutUs->image_path,
+        'page_title' => 'Our Services',
+        'services' => $services->map(function ($service) {
+            return [
+                'title' => $service->title,
+                'subtitle' => $service->subtitle,
+                // 'image_url' => $service->image_path
+                //     ? asset('storage/' . $service->image_path)
+                //     : '/default-image.jpg',
+                'image_url'=> $service->image_path,
+                'extra_class' => $service->extra_class,
+            ];
+        })->toArray(),
+        'testimonials' => $testimonials->map(function ($testimonial) {
+            return [
+                'name' => $testimonial->name,
+                'designation' => $testimonial->designation,
+                'description' => $testimonial->description,
+                // 'image_url' => $testimonial->image_path
+                //     ? asset('storage/' . $testimonial->image_path)
+                //     : '/default-image.png',
+                'image_url'=> $testimonial->image_path,
+            ];
+        })->toArray(),
+        'features' => $feature->map(function ($feature) {
+            return [
+                'title' => $feature->title,
+                'description' => $feature->description,
+                // 'image_url' => $feature->image_path
+                //     ? asset('storage/' . $feature->image_path)
+                //     : '/default-feature-image.jpg',
+                'image_url' =>$feature->image_path,
+            ];
+        })->toArray(),
+        'contacts' => [
+            'title' => $contact->title ?? 'Contact Us',
+            'company_name' => $contact->company_name ?? 'Your Company Name',
+            'cin_no' => $contact->cin_no ?? 'Default CIN',
+            'registration_no' => $contact->registration_no ?? 'Default Registration No',
+            'address' => $contact->address ?? 'Your Address',
+            'email' => $contact->email ?? 'info@yourdomain.com',
+            'phone' => $contact->phone ?? '+91 0000000000',
+            'map_embed_url' => $contact->map_embed_url ?? 'https://maps.google.com',
+        ],
+    ];
+
+    $footer = [
+        'about_us_title' => $footer->about_us_title ?? 'About Us',
+        'about_us_text' => $footer->about_us_text ?? 'Default About Us text.',
+        'footer_logo' => $footer->footer_logo ?? 'Your Logo URL',
+        'email' => $footer->email ?? 'info@yourdomain.com',
+        'phone' => $footer->phone ?? '+91 9876543210',
+        'address' => $footer->address ?? '123 Your Address, Your City, Your Country',
+        'useful_links' => $usefulLinks,
+        'social_links' => $socialLinks,
+        'footer_text' => $footer->footer_text ?? 'Developed by:',
+        'developer_name' => $footer->developer_name ?? 'Your Developer',
+        'developer_link' => $footer->developer_link ?? 'https://developer-website.com',
+    ];
+
+    // Include the file with dynamic content
+
+    ob_start();
+    extract(['content' => $content, 'footer'=>$footer]); // Pass the $content array to the included PHP file
+    include $filePath; // Include the index.php file
+    $output = ob_get_clean(); // Capture the output
+
+    return response($output);
+}
 
 }

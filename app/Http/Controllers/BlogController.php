@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Blog;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -13,7 +14,17 @@ class BlogController extends Controller
     public function index()
     {
         try {
-            $blogs = Blog::all();
+            $blogs = Blog::query()
+            ->when(Auth::user()->role == 'admin', function ($query) {
+                $query->orderBy('created_at', 'desc');
+            })
+            ->when(Auth::user()->role != 'admin', function ($query) {
+                $authorName = Auth::user()->Fname . ' ' . Auth::user()->Lname;
+                $query->where('author', $authorName)
+                      ->orderBy('created_at', 'desc');
+            })
+            ->get();
+
             return view('blogs.index', compact('blogs'));
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
@@ -31,6 +42,8 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
+        $author = Auth::user();
+
         $request->validate([
             'title' => 'required',
             'content' => 'required',
@@ -48,7 +61,7 @@ class BlogController extends Controller
                 'title' => $request->title,
                 'content' => $request->content,
                 'slug' => Str::slug($request->title),
-                'author' => $request->author ?? 'Default Author',
+                'author' => $author->Fname . ' ' . $author->Lname,
                 'featured_image' => $imagePath,
             ]);
 
@@ -78,6 +91,7 @@ class BlogController extends Controller
 
     public function update(Request $request, Blog $blog)
     {
+        $author= Auth::user();
         $request->validate([
             'title' => 'required',
             'content' => 'required',
@@ -95,7 +109,7 @@ class BlogController extends Controller
                 'title' => $request->title,
                 'content' => $request->content,
                 'slug' => Str::slug($request->title),
-                'author' => $request->author ?? 'Default Author',
+                'author' => $author->Fname . ' ' . $author->Lname,
                 'featured_image' => $imagePath,
             ]);
 

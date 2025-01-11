@@ -39,8 +39,9 @@
                     <tbody>
                         @forelse ($blogs as $blog)
                             <tr>
+                                {{-- {{dd($blog)}} --}}
                                 <td>{{ $blog->title }}</td>
-                                <td>{{ $blog->author }}</td>
+                                <td>{{ $blog->author}}</td>
                                 <td>
                                     @if ($blog->featured_image)
                                         <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="Featured Image" class="img-thumbnail" style="width: 100px; height: auto;">

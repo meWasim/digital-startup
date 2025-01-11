@@ -9,7 +9,8 @@ use  App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\PermissionController;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DiscussProjectController;
 
 Route::get('/',[HomeController::class,'index']);
 Auth::routes();
@@ -18,6 +19,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/about-us', [PageController::class, 'aboutUs'])->name('about.us');
+Route::get('/discuss-project', [PageController::class, 'discussProject'])->name('discuss.project');
+Route::post('/discuss-project', [DiscussProjectController::class, 'store'])->name('discuss-project.store');
+Route::get('/discuss-project/Details', [DiscussProjectController::class, 'index'])->name('discuss-project.index');
 Route::get('/blog', [PageController::class, 'blog'])->name('blog');
 Route::get('/blog-detail/{slug}', [PageController::class, 'blogDetail'])->name('blog.detail');
 Route::post('/blogs/uploadImage', [BlogController::class, 'uploadImage'])->name('blogs.uploadImage');
@@ -29,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('permissions', PermissionController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('blogs', BlogController::class);
-
+Route::resource('users', UserController::class);
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('templates', TemplateController::class);
     });

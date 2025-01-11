@@ -17,6 +17,7 @@ class UserWithRoleSeeder extends Seeder
     {
         // Step 1: Define permissions
         $adminPermissions = [
+            'view-users',
             'create-users',
             'edit-users',
             'delete-users',
@@ -31,7 +32,8 @@ class UserWithRoleSeeder extends Seeder
             'create-blog',
             'edti-blog',
             'show-blog',
-            'delete-blog'
+            'delete-blog',
+            'contact',
 
         ];
 

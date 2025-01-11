@@ -21,7 +21,7 @@ class BlogFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => $this->faker->paragraphs(5, true),
-            'author' => $this->faker->name,
+            'author' => 2,
             'featured_image' => $this->faker->imageUrl(800, 400, 'blogs', true, 'Faker'),
             'created_at' => now(),
             'updated_at' => now(),

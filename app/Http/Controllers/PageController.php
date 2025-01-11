@@ -17,7 +17,7 @@ class PageController extends Controller
 
     if ($request->filled('title')) {
         $query->where('title', 'like', '%' . $request->title . '%');
-        
+
     }
 
     if ($request->filled('author')) {
@@ -48,5 +48,9 @@ class PageController extends Controller
     public function contactUs()
     {
         return view('pages.contactUs');
+    }
+    public function discussProject()
+    {
+        return view('pages.discussProject');
     }
 }

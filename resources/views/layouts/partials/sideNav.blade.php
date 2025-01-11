@@ -102,60 +102,75 @@
 
         <!-- Management Section -->
         <li
-            class="nav-item {{ request()->routeIs(['roles.*', 'permissions.*', 'admin.templates.*', 'blogs.*']) ? 'management-active' : '' }}">
-            <a class="nav-link {{ request()->routeIs(['roles.*', 'permissions.*', 'admin.templates.*', 'blogs.*']) ? '' : 'collapsed' }}"
-                data-bs-toggle="collapse" href="#managementSubmenu" role="button"
-                aria-expanded="{{ request()->routeIs(['roles.*', 'permissions.*', 'admin.templates.*', 'blogs.*']) ? 'true' : 'false' }}"
-                aria-controls="managementSubmenu">
-                <i class="fa fa-cogs mr-2"></i>Management
+            class="nav-item {{ request()->routeIs(['roles.*', 'permissions.*', 'admin.templates.*', 'blogs.*', 'users.*']) ? 'management-active' : '' }}">
+            <a class="nav-link {{ request()->routeIs(['roles.*', 'permissions.*', 'admin.templates.*', 'blogs.*', 'users.*']) ? '' : 'collapsed' }}"
+            data-bs-toggle="collapse" href="#managementSubmenu" role="button"
+            aria-expanded="{{ request()->routeIs(['roles.*', 'permissions.*', 'admin.templates.*', 'blogs.*', 'users.*']) ? 'true' : 'false' }}"
+            aria-controls="managementSubmenu">
+            <i class="fa fa-cogs mr-2"></i>Management
             </a>
-            <div class="collapse {{ request()->routeIs(['roles.*', 'permissions.*', 'admin.templates.*', 'blogs.*']) ? 'show' : '' }}"
-                id="managementSubmenu">
-                <ul class="list-unstyled ps-3">
-                    <!-- Role Management -->
-                    @can('view-roles')
-                    <li>
-                        <a href="{{ route('roles.index') }}"
-                            class="nav-link {{ request()->routeIs('roles.*') ? 'active bg-primary text-white' : '' }}">
-                            <i class="fa fa-user-circle mr-2"></i>Role Management
-                        </a>
-                    </li>
-                    @endcan
+            <div class="collapse {{ request()->routeIs(['roles.*', 'permissions.*', 'admin.templates.*', 'blogs.*', 'users.*']) ? 'show' : '' }}"
+            id="managementSubmenu">
+            <ul class="list-unstyled ps-3">
+                <!-- Role Management -->
+                @can('view-roles')
+                <li>
+                <a href="{{ route('roles.index') }}"
+                    class="nav-link {{ request()->routeIs('roles.*') ? 'active bg-primary text-white' : '' }}">
+                    <i class="fa fa-user-circle mr-2"></i>Role Management
+                </a>
+                </li>
+                @endcan
 
-                    <!-- User Management -->
-                    <li>
-                        <a href="user-management.php" class="nav-link">
-                            <i class="fa fa-users mr-2"></i>User Management
-                        </a>
+                <!-- User Management -->
+                @can('view-users')
+                <li>
+                    <a href="{{ route('users.index') }}"
+                        class="nav-link {{ request()->routeIs('users.*') ? 'active bg-primary text-white' : '' }}">
+                        <i class="fa fa-users mr-2"></i>User Management
+                    </a>
                     </li>
-                    <!-- Permission Management -->
-                    <li>
-                        <a href="{{ route('permissions.index') }}"
-                            class="nav-link {{ request()->routeIs('permissions.*') ? 'active bg-primary text-white' : '' }}">
-                            <i class="fa fa-lock mr-2"></i>Permission Management
-                        </a>
+                @endcan
+
+                <!-- Permission Management -->
+                @can('view-permissions')
+                <li>
+                    <a href="{{ route('permissions.index') }}"
+                        class="nav-link {{ request()->routeIs('permissions.*') ? 'active bg-primary text-white' : '' }}">
+                        <i class="fa fa-lock mr-2"></i>Permission Management
+                    </a>
                     </li>
-                    <!-- Template Management -->
-                    <li>
-                        <a href="{{ route('admin.templates.index') }}"
-                            class="nav-link {{ request()->routeIs('admin.templates.*') ? 'active bg-primary text-white' : '' }}">
-                            <i class="fa fa-wrench mr-2"></i>Template Management
-                        </a>
-                    </li>
-                    <!-- Blog Management -->
-                    <li>
-                        <a href="{{ route('blogs.index') }}"
-                            class="nav-link {{ request()->routeIs('blogs.*') ? 'active bg-primary text-white' : '' }}">
-                            <i class="fa fa-book mr-2"></i>Blog Management
-                        </a>
-                    </li>
-                </ul>
+                @endcan
+
+                <!-- Template Management -->
+                <li>
+                <a href="{{ route('admin.templates.index') }}"
+                    class="nav-link {{ request()->routeIs('admin.templates.*') ? 'active bg-primary text-white' : '' }}">
+                    <i class="fa fa-wrench mr-2"></i>Template Management
+                </a>
+                </li>
+                <!-- Blog Management -->
+
+                <li>
+                <a href="{{ route('blogs.index') }}"
+                    class="nav-link {{ request()->routeIs('blogs.*') ? 'active bg-primary text-white' : '' }}">
+                    <i class="fa fa-book mr-2"></i>Blog Management
+                </a>
+                </li>
+            </ul>
             </div>
         </li>
         @can('contact')
         <li class="nav-item">
-            <a href="{{ route('contacts.index') }}" class="nav-link {{ request()->routeIs('contacts.index') ? 'active' : '' }}">
+            <a href="{{ route('contacts.index') }}" class="nav-link {{ request()->routeIs('contacts.index') ? 'active bg-primary text-white' : '' }}">
                 <i class="fa fa-envelope mr-2"></i>Messages
+            </a>
+        </li>
+        @endcan
+        @can('discuss-project')
+        <li class="nav-item">
+            <a href="{{ route('discuss-project.index') }}" class="nav-link {{ request()->routeIs('discuss-project.index') ? 'active bg-primary text-white' : '' }}">
+                <i class="fa fa-envelope mr-2"></i>Discussion Project
             </a>
         </li>
         @endcan

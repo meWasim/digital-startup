@@ -29,6 +29,7 @@ class UserWithRoleSeeder extends Seeder
             'create-permissions',
             'edit-permissions',
             'delete-permissions',
+            'view-tamplates',
             'create-blog',
             'edti-blog',
             'show-blog',

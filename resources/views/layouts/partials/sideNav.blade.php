@@ -62,43 +62,69 @@
 
         <!-- Regular Items -->
         <li class="nav-item">
-            <a href="logo-design.php" class="nav-link {{ request()->routeIs('logo-design') ? 'active' : '' }}">
+            <a href="{{route('logo.design')}}" class="nav-link {{ request()->routeIs('logo.design') ? 'active' : '' }}">
                 <i class="fa fa-paint-brush mr-2"></i>Logo Design
             </a>
         </li>
         <li class="nav-item">
-            <a href="graphic-design.php" class="nav-link {{ request()->routeIs('graphic-design') ? 'active' : '' }}">
+            <a href="{{route('graphic.design')}}" class="nav-link {{ request()->routeIs('graphic.design') ? 'active' : '' }}">
                 <i class="fa fa-picture-o mr-2"></i>Graphic Design
             </a>
         </li>
         <li class="nav-item">
-            <a href="website-design.php" class="nav-link {{ request()->routeIs('website-design') ? 'active' : '' }}">
+            <a href="{{route('website.design')}}" class="nav-link {{ request()->routeIs('website.design') ? 'active' : '' }}">
                 <i class="fa fa-desktop mr-2"></i>Website Design
             </a>
         </li>
         <li class="nav-item">
-            <a href="brochure-design.php" class="nav-link {{ request()->routeIs('brochure-design') ? 'active' : '' }}">
+            <a href="{{route('brochure.design')}}" class="nav-link {{ request()->routeIs('brochure.design') ? 'active' : '' }}">
                 <i class="fa fa-book mr-2"></i>Brochure Design
             </a>
         </li>
         <li class="nav-item">
-            <a href="mobile-application.php"
-                class="nav-link {{ request()->routeIs('mobile-application') ? 'active' : '' }}">
+            <a href="{{route('mobile.application')}}"
+                class="nav-link {{ request()->routeIs('mobile.application') ? 'active' : '' }}">
                 <i class="fa fa-android mr-2"></i>Mobile App Development
             </a>
         </li>
         <li class="nav-item">
-            <a href="crm-software-development.php"
-                class="nav-link {{ request()->routeIs('crm-software-development') ? 'active' : '' }}">
+            <a href="{{route('crm')}}"
+                class="nav-link {{ request()->routeIs('crm') ? 'active' : '' }}">
                 <i class="fa fa-code mr-2"></i>CRM Software Development
             </a>
         </li>
         <li class="nav-item">
-            <a href="digital-marketing.php"
-                class="nav-link {{ request()->routeIs('digital-marketing') ? 'active' : '' }}">
+            <a href="{{route('digital.marketing')}}"
+                class="nav-link {{ request()->routeIs('digital.marketing') ? 'active' : '' }}">
                 <i class="fa fa-bullhorn mr-2"></i>Digital Marketing Service
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('hosting.service') }}" class="nav-link {{ request()->routeIs('hosting.service') ? 'active' : '' }}">
+                <i class="fa fa-server mr-2"></i> Hosting Service
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('domain.purchase') }}" class="nav-link {{ request()->routeIs('domain.purchase') ? 'active' : '' }}">
+                <i class="fa fa-globe mr-2"></i> Domain Purchase
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('fbads') }}" class="nav-link {{ request()->routeIs('fbads') ? 'active' : '' }}">
+                <i class="fa fa-facebook mr-2"></i> Facebook Ads
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('googleads') }}" class="nav-link {{ request()->routeIs('googleads') ? 'active' : '' }}">
+                <i class="fa fa-google mr-2"></i> Google Ads
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('twitterads') }}" class="nav-link {{ request()->routeIs('twitterads') ? 'active' : '' }}">
+                <i class="fa fa-twitter mr-2"></i> Twitter Ads
+            </a>
+        </li>
+
 
         <!-- Management Section -->
         <li
@@ -143,12 +169,15 @@
                 @endcan
 
                 <!-- Template Management -->
+                @can('view-templates')
                 <li>
-                <a href="{{ route('admin.templates.index') }}"
-                    class="nav-link {{ request()->routeIs('admin.templates.*') ? 'active bg-primary text-white' : '' }}">
-                    <i class="fa fa-wrench mr-2"></i>Template Management
-                </a>
-                </li>
+                    <a href="{{ route('admin.templates.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.templates.*') ? 'active bg-primary text-white' : '' }}">
+                        <i class="fa fa-wrench mr-2"></i>Template Management
+                    </a>
+                    </li>
+                @endcan
+
                 <!-- Blog Management -->
 
                 <li>

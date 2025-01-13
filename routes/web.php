@@ -73,5 +73,5 @@ Route::domain('{subdomain}.digitalStartups.com')->group(function () {
 });
 
 // Route::get('/contact-us', [ContactController::class, 'contactPage'])->name('contact.page');
-Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');
+// Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');
 

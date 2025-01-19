@@ -74,4 +74,6 @@ Route::domain('{subdomain}.digitalStartups.com')->group(function () {
 
 // Route::get('/contact-us', [ContactController::class, 'contactPage'])->name('contact.page');
 // Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');
-
+Route::get('/template/check-edit', [TemplateController::class, 'checkAndEdit'])->name('check.template.edit');
+Route::get('/template/{template_id}/edit-page', [TemplateController::class, 'editPage'])->name('template.edit.page');
+Route::post('/template/{template_id}/update', [TemplateController::class, 'update_template'])->name('template.update');

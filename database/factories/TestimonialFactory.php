@@ -21,7 +21,7 @@ class TestimonialFactory extends Factory
     {
         return [
             'user_id' => 1, // Replace with a valid user ID or use a random user from the `User` factory
-            'template_id' => 472, // Replace with a valid template ID or use a random template
+            'template_id' => 1, // Replace with a valid template ID or use a random template
             'name' => $this->faker->name(),
             'designation' => $this->faker->jobTitle(),
             'description' => $this->faker->paragraph(),

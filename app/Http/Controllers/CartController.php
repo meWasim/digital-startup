@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\Footer;
+use App\Models\Header;
 use App\Models\AboutUs;
 use App\Models\Contact;
 use App\Models\Feature;
 use App\Models\Service;
 use App\Models\Template;
+use App\Models\BlogPosts;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Models\ContactTemplate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -65,6 +69,7 @@ class CartController extends Controller
 
         // Modify the necessary files for the user-specific template
         $this->makeAboutUsDynamic($destinationPath);
+        $this->makeBlogPageDynamic($destinationPath);
         $this->makeChooseUsDynamic($destinationPath);
         $this->makeTestimonialDynamic($destinationPath);
         $this->makeContactUsDynamic($destinationPath);
@@ -75,6 +80,47 @@ class CartController extends Controller
         return response()->json(['success' => 'Template added to cart and updated successfully.']);
     }
 
+
+
+    protected function makeBlogPageDynamic($destinationPath)
+    {
+        $blogPath = "$destinationPath/include/blog.php";
+
+        if (File::exists($blogPath)) {
+            // Replace static content with dynamic placeholders for the blog
+            $dynamicContent = '
+            <div class="container py-3 px-0" id="blog">
+                <div class="row">
+                    <h2 class="page-header w-100 d-block text-center pb-3">Our Blog</h2>
+                </div>
+                <div class="row">
+                    <?php foreach ($content["blog_posts"] ?? [] as $post): ?>
+                        <div class="col-md-4 col-sm-4 mb-md-0 mb-3">
+                            <div class="blog w-100 d-block">
+                                <a href="blog-details-<?php echo $post["id"]; ?>.php">
+                                    <img src="<?= $post["image_url"] ?? "default-image.jpg"; ?>" alt="<?= $post["title"] ?? "Blog Post Title"; ?>">
+                                </a>
+                                <strong class="w-100 d-block pt-3 pb-2 px-3">
+                                    <i class="fa fa-calendar mr-2" aria-hidden="true"></i><?= $post["published_at"] ?? "Date"; ?>
+                                </strong>
+                                <h4 class="w-100 d-block pb-2 px-3">
+                                    <a href="blog-details-<?php echo $post["id"]; ?>.php"><?= $post["title"] ?? "Blog Post Title"; ?></a>
+                                </h4>
+                                <p class="d-block px-3"><?= substr($post["content"], 0, 150) ?? "Blog post summary..."; ?></p>
+                                <a href="blog-details-<?php echo $post["id"]; ?>.php" class="read-more py-2">Read More</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>';
+
+            // Write the dynamic content back to the file
+            File::put($blogPath, $dynamicContent);
+        } else {
+            throw new \Exception("blog.php not found in $destinationPath/include.");
+        }
+    }
+
 protected function makeServicesDynamic($destinationPath)
 {
     $servicePath = "$destinationPath/include/service.php";
@@ -82,20 +128,20 @@ protected function makeServicesDynamic($destinationPath)
     if (File::exists($servicePath)) {
         // Replace static content with dynamic placeholders
         $dynamicContent = '
-        <div class="container py-3">
+        <div class="container py-3" id="service">
             <div class="row">
                 <h2 class="page-header w-100 d-block text-center pb-3"><?= $content["page_title"] ?? "Our Services"; ?></h2>
             </div>
             <div class="row">
                 <?php foreach ($content["services"] ?? [] as $service): ?>
-                    <div class="col-md-4 col-sm-4 <?= $service["extra_class"] ?? ""; ?>">
+                    <div class="col-md-4 col-sm-4 pl-md-0">
                         <div class="servs w-100">
                             <div class="zoom-effect-container">
                                 <div class="image-card">
                                     <img src="<?= $service["image_url"] ?? "/default-image.jpg"; ?>" alt="<?= $service["title"] ?? "Service"; ?>">
                                 </div>
                             </div>
-                            <div class="service-info w-100 d-block p-md-5 p-3">
+                            <div class="bed-bug w-100 d-block p-md-5 p-3">
                                 <h4 class="d-block text-center pb-md-3"><?= $service["title"] ?? "Service Title"; ?></h4>
                                 <h5 class="d-block text-center"><?= $service["subtitle"] ?? "Service Subtitle"; ?></h5>
                             </div>
@@ -120,11 +166,16 @@ protected function makeHeaderDynamic($destinationPath, $templateName)
     if (File::exists($headerPath)) {
         // Prepare resolved menu links
         $menuLinks = [
-            ["url" => asset("templates-user/$templateName/index.php"), "text" => "Home"],
-            ["url" => asset("templates-user/$templateName/about-us.php"), "text" => "About Us"],
-            ["url" => asset("templates-user/$templateName/services.php"), "text" => "Services"],
-            ["url" => asset("templates-user/$templateName/blog.php"), "text" => "Blog"],
-            ["url" => asset("templates-user/$templateName/contact-us.php"), "text" => "Contact Us"],
+            // ["url" => asset("templates-user/$templateName/index.php"), "text" => "Home"],
+            // ["url" => asset("templates-user/$templateName/about-us.php"), "text" => "About Us"],
+            // ["url" => asset("templates-user/$templateName/services.php"), "text" => "Services"],
+            // ["url" => asset("templates-user/$templateName/blog.php"), "text" => "Blog"],
+            // ["url" => asset("templates-user/$templateName/contact-us.php"), "text" => "Contact Us"],
+            ["url" => "#home", "text" => "Home"],
+            ["url" => "#about-us", "text" => "About Us"],
+            ["url" => "#service", "text" => "Services"],
+            ["url" => "#blog", "text" => "Blog"],
+            ["url" => "#contact-us", "text" => "Contact Us"],
         ];
 
         // Convert menu links array to PHP code
@@ -202,6 +253,11 @@ protected function makeFooterDynamic($destinationPath)
     if (File::exists($footerPath)) {
         // Replace static content with dynamic placeholders
         $dynamicContent = '
+        <style>
+        html {
+    scroll-behavior: smooth;
+}
+        <style>
         <div class="container footer-bg w-100 d-block pt-3 mt-md-3">
             <div class="row pl-md-3">
                 <div class="col-md-4 col-sm-4">
@@ -254,7 +310,7 @@ protected function makeContactUsDynamic($destinationPath)
     if (File::exists($contactUsPath)) {
         // Replace static content with dynamic placeholders
         $dynamicContent = <<<PHP
-<div class="container py-md-3">
+<div class="container py-md-3" id="contact-us">
     <div class="row">
         <h2 class="page-header w-100 d-block text-center pb-3"><?php echo htmlspecialchars(\$contact->title ?? 'Contact Us'); ?></h2>
     </div>
@@ -333,49 +389,56 @@ protected function makeTestimonialDynamic($destinationPath)
     $testimonialPath = "$destinationPath/include/testimonial.php";
 
     if (File::exists($testimonialPath)) {
-        // Replace static content with dynamic placeholders
-        $dynamicContent = '
-        <div class="container pt-2 pb-3">
-            <div class="row">
-                <h2 class="page-header w-100 d-block text-center"><?= $content["title"] ?? "Testimonial"; ?></h2>
+        try {
+            // Replace static content with dynamic placeholders
+            $dynamicContent = <<<'EOD'
+            <div class="container pt-2 pb-3">
+                <div class="row">
+                    <h2 class="page-header w-100 d-block text-center"><?= $content["title"] ?? "Testimonials"; ?></h2>
+                </div>
             </div>
-        </div>
-        <div class="col-md-12 col-sm-12 client-bg mx-auto pt-4">
-            <div class="p-md-2 paralax rounded position-relative">
-                <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
-                    <ol class="carousel-indicators mb-0">
-                        <?php foreach ($content["testimonials"] ?? [] as $index => $testimonial): ?>
-                            <li class="<?= $index === 0 ? "active" : ""; ?>" data-target="#carouselExampleIndicators" data-slide-to="<?= $index; ?>"></li>
-                        <?php endforeach; ?>
-                    </ol>
-                    <div class="carousel-inner px-md-0 pb-4">
-                        <?php foreach ($content["testimonials"] ?? [] as $index => $testimonial): ?>
-                            <div class="carousel-item <?= $index === 0 ? "active" : ""; ?>">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="testimonial w-100 d-block text-center px-md-5">
-                                                <img src="<?= $testimonial["image_url"] ?? "/default-image.png"; ?>" alt="<?= $testimonial["name"] ?? "Client"; ?>">
-                                                <h3 class="w-100 d-block text-center"><?= $testimonial["name"] ?? "Client Name"; ?></h3>
-                                                <span class="w-100 d-block text-center"><?= $testimonial["designation"] ?? "Designation"; ?></span>
-                                                <p class="d-block pt-3"><?= $testimonial["description"] ?? "Default testimonial description."; ?></p>
+            <div class="col-md-12 col-sm-12 client-bg mx-auto pt-4">
+                <div class="p-md-2 paralax rounded position-relative">
+                    <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
+                        <ol class="carousel-indicators mb-0">
+                            <?php foreach ($content["testimonials"] ?? [] as $index => $testimonial): ?>
+                                <li class="<?= $index === 0 ? "active" : ""; ?>" data-target="#carouselExampleIndicators" data-slide-to="<?= $index; ?>"></li>
+                            <?php endforeach; ?>
+                        </ol>
+                        <div class="carousel-inner px-md-0 pb-4">
+                            <?php foreach ($content["testimonials"] ?? [] as $index => $testimonial): ?>
+                                <div class="carousel-item <?= $index === 0 ? "active" : ""; ?>">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="testimonial w-100 d-block text-center px-md-5">
+                                                    <img src="<?= $testimonial["image_url"] ?? "/default-image.png"; ?>"
+                                                         alt="<?= htmlspecialchars($testimonial["name"] ?? "Client"); ?>">
+                                                    <h3 class="w-100 d-block text-center"><?= htmlspecialchars($testimonial["name"] ?? "Client Name"); ?></h3>
+                                                    <span class="w-100 d-block text-center"><?= htmlspecialchars($testimonial["designation"] ?? "Designation"); ?></span>
+                                                    <p class="d-block pt-3"><?= htmlspecialchars($testimonial["description"] ?? "No testimonial provided."); ?></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>';
+            EOD;
 
-        // Write the dynamic content back to the file
-        File::put($testimonialPath, $dynamicContent);
+            // Write the dynamic content back to the file
+            File::put($testimonialPath, $dynamicContent);
+        } catch (\Exception $e) {
+            throw new \Exception("Error writing to $testimonialPath: " . $e->getMessage());
+        }
     } else {
         throw new \Exception("testimonial.php not found in $destinationPath/include.");
     }
 }
+
 
 protected function makeAboutUsDynamic($destinationPath)
 {
@@ -384,6 +447,9 @@ protected function makeAboutUsDynamic($destinationPath)
     if (File::exists($aboutUsPath)) {
         // Replace static content with dynamic placeholders
         $dynamicContent = '
+        <div class="row" id="home">
+	 	  <h2 class="page-header w-100 d-block text-center pb-3">About Us</h2>
+	    </div>
         <div class="row">
             <div class="col-md-6 col-sm-6 story-bg">
                 <h2 class="w-100 d-block text-center pb-2">Our Story</h2>
@@ -395,9 +461,12 @@ protected function makeAboutUsDynamic($destinationPath)
                 <h2 class="w-100 d-block text-center pb-2">Vision</h2>
                 <p class="d-block"><?= $content["vision"] ?? "Default vision content"; ?></p>
             </div>
-            <div class="col-md-6 col-sm-6 pr-md-0">
-                <img src="<?= $content["image_url"] ?? "/default-image.jpg"; ?>" class="img-fluid" alt="">
-            </div>
+           <div class="col-md-6 col-sm-6 pr-md-0">
+    <img
+        src="<?= !empty($content["image_url"]) ? $content["image_url"] : "http://127.0.0.1:8000/templates-master/001-robax-pest-control/images/story-01.jpg"; ?>"
+        class="img-fluid"
+        alt="Image description">
+     </div>
         </div>';
 
         // Write the dynamic content back to the file
@@ -480,25 +549,50 @@ public function preview($templateFolder)
     $aboutUs = AboutUs::where('user_id', $userId)
         ->where('template_id', $template->id)
         ->first();
+
     $services = Service::where('user_id', $userId)->where('template_id', $template->id)->get();
     $testimonials = Testimonial::where('user_id', $userId)->where('template_id', $template->id)->get();
     $feature = Feature::where('user_id', $userId)->where('template_id', $template->id)->get();
-    $contact = Contact::where('user_id', $userId)->where('template_id', $template->id)->first();
+    $contact = ContactTemplate::where('user_id', $userId)->where('template_id', $template->id)->first();
     $footer = Footer::where('user_id', $userId)->where('template_id', $template->id)->first();
+    $blogPosts = BlogPosts::where('user_id', $userId)->where('template_id', $template->id)->get();
+    $header = Header::where('user_id', $userId)->where('template_id', $template->id)->first();
 
+    $defaultImage = file_exists(public_path('templates-user/'.$templateFolder.'/images/story-01.jpg'))
+    ? 'story-01.jpg'
+    : 'story.jpg';
 
 
     $usefulLinks = $footer ? json_decode($footer->useful_links, true) : [];
     $socialLinks = $footer ? json_decode($footer->social_links, true) : [];
     // Prepare content array
     $content = [
+        'home_url' => $header->home_url ?? '/',
+        'logo_text' => $header->logo_text ?? 'Your Logo',
+      'menu_links' => $header && $header->menu_links ? json_decode($header->menu_links, true) : [
+    ['url' => '#home', 'text' => 'Home'],
+    ['url' => '#about-us', 'text' => 'About Us'],
+    ['url' => '#service', 'text' => 'Services'],
+    ['url' => '#blog', 'text' => 'Blog'],
+    ['url' => '#contact-us', 'text' => 'Contact Us'],
+],
+      'social_links' => $header && $header->social_links ? json_decode($header->social_links, true) : [
+    ['url' => 'https://facebook.com', 'icon' => 'fa fa-facebook'],
+    ['url' => 'https://twitter.com', 'icon' => 'fa fa-twitter'],
+    ['url' => 'https://instagram.com', 'icon' => 'fa fa-instagram'],
+    ['url' => 'https://youtube.com', 'icon' => 'fa fa-youtube-play'],
+],
+        'phone_number' => $header->phone_number ?? '+91 0000000000',
         'our_story' => $aboutUs->our_story ?? 'Default story content',
         'mission' => $aboutUs->mission ?? 'Default mission content',
         'vision' => $aboutUs->vision ?? 'Default vision content',
         // 'image_url' => $aboutUs && $aboutUs->image_path
         //     ? asset('storage/' . $aboutUs->image_path)
         //     : '/default-image.jpg',
-        'image_url'=> $aboutUs->image_path,
+        'image_url' => !empty($aboutUs->image_path)
+    ? $aboutUs->image_path
+    : asset('templates-user/'.$templateFolder.'/images/'.$defaultImage),
+
         'page_title' => 'Our Services',
         'services' => $services->map(function ($service) {
             return [
@@ -530,6 +624,16 @@ public function preview($templateFolder)
                 //     ? asset('storage/' . $feature->image_path)
                 //     : '/default-feature-image.jpg',
                 'image_url' =>$feature->image_path,
+            ];
+        })->toArray(),
+        'blog_posts' => $blogPosts->map(function ($blogPost) {
+            return [
+                'id' => $blogPost->id,
+                'title' => $blogPost->title,
+                'description' => $blogPost->description,
+                'content' => $blogPost->content,
+                'image_url' => $blogPost->image_url,
+               'published_at' => Carbon::parse($blogPost->published_at)->format('F j, Y'), // Format the date as needed
             ];
         })->toArray(),
         'contacts' => [

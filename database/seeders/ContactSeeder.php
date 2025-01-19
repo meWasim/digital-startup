@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Contact;
+
+use App\Models\ContactTemplate;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -13,9 +14,9 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-       Contact::create([
+       ContactTemplate::create([
             'user_id' => 1,
-            'template_id' => 472,
+            'template_id' => 1,
             'company_name' => 'Your Company Name',
             'cin_no' => 'ABC123XYZ',
             'registration_no' => '123456789',

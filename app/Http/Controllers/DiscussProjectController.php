@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DiscussProject;
+use Illuminate\Support\Facades\Mail; // Add this import
+use App\Mail\Quotation;
+
 
 class DiscussProjectController extends Controller
 {
@@ -54,7 +57,8 @@ class DiscussProjectController extends Controller
             $data['image'] = $request->file('image')->store('images', 'public');
         }
 
-        DiscussProject::create($data);
+        $discussProject=DiscussProject::create($data);
+        Mail::to($discussProject->email)->send(new Quotation((object)$data));
 
         return redirect()->back()->with('success', 'Project discussion submitted successfully!');
     }

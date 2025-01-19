@@ -169,7 +169,7 @@
                 @endcan
 
                 <!-- Template Management -->
-                @can('view-templates')
+                @can('view-tamplates')
                 <li>
                     <a href="{{ route('admin.templates.index') }}"
                         class="nav-link {{ request()->routeIs('admin.templates.*') ? 'active bg-primary text-white' : '' }}">

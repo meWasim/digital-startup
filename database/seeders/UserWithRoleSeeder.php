@@ -35,6 +35,7 @@ class UserWithRoleSeeder extends Seeder
             'show-blog',
             'delete-blog',
             'contact',
+            'discuss-project',
 
         ];
 

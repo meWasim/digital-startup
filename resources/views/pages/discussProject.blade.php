@@ -53,6 +53,7 @@
                                 <option value="Rs.20001 - Rs.30000">Rs.20001 - Rs.30000</option>
                                 <option value="Rs.30001 - Rs.40000">Rs.30001 - Rs.40000</option>
                                 <option value="Rs.40001 - Rs.50000">Rs.40001 - Rs.50000</option>
+                                <option value="Above Rs.50000">Above Rs.50000</option>
                             </select>
                         </div>
                         <div class="form-group mb-md-3 mb-2">

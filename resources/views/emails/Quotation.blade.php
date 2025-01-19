@@ -91,7 +91,7 @@
 
             <!-- Email Body -->
             <div class="email-body">
-                <h2>Hi {{ $user->name }},</h2>
+                <h2>Hi {{ $user->full_name }},</h2>
                 <p>We’ve received your message and want to thank you for contacting us. Our team is reviewing your query and will respond as soon as possible.</p>
                 <p>In the meantime, feel free to browse through our website or reach out to us for any urgent matters.</p>
                 <a href="https://yourcompanywebsite.com">Visit Our Website</a>
@@ -99,8 +99,8 @@
 
             <!-- Email Footer -->
             <div class="email-footer">
-                <p>&copy; {{ date('Y') }} Your Company Name. All rights reserved.</p>
-                <p><a href="mailto:support@yourcompany.com">Contact Support</a></p>
+                <p>&copy; {{ date('Y') }} Digital Startups. All rights reserved.</p>
+                <p><a href="mailto:support@digitalstartups.com">Contact Support</a></p>
             </div>
         </div>
     </div>

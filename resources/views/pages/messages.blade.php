@@ -48,7 +48,7 @@
 
             <!-- Messages Table -->
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="contactTable">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -77,11 +77,30 @@
             </div>
 
             <!-- Pagination -->
-            <div class="d-flex justify-content-center">
+            {{-- <div class="d-flex justify-content-center">
                 {{ $messages->links() }}
-            </div>
+            </div> --}}
         </div>
     </section>
 
-   
+    <script>
+        $(document).ready(function () {
+            $('#contactTable').DataTable({
+                responsive: true,
+                order: [[9, 'desc']], // Sort by 'Sent At' column in descending order
+                columnDefs: [
+                    { orderable: false, targets: [0, 7, 8] }, // Disable ordering for certain columns
+                ],
+                language: {
+                    search: "Search Projects:",
+                    lengthMenu: "Show _MENU_ entries",
+                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                    paginate: {
+                        previous: "Prev",
+                        next: "Next",
+                    },
+                },
+            });
+        });
+    </script>
 @endsection

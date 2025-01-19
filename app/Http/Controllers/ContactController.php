@@ -79,10 +79,9 @@ class ContactController extends Controller
             // Store contact data
             $contact = Contact::create($data);
 
-            // Send acknowledgment email
-            // Mail::to($contact->email)->send(new ThankYouMail($contact->name));
+            Mail::to($contact->email)->send(new ThankYouMail((object)$data));
 
-          
+
             return redirect()->back()->with('success', 'Your message has been sent successfully!');
         } catch (\Exception $e) {
             // Log the error for debugging

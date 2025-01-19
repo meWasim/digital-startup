@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ThankYouMail extends Mailable
+class Quotation extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -26,7 +26,7 @@ class ThankYouMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Thank You for Contacting Us!'
+            subject: 'Thank You for discuss your project with-us',
         );
     }
 
@@ -36,7 +36,7 @@ class ThankYouMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.thank_you', // Define the correct email template
+            view: 'emails.quotation', // Define the correct email template
             with: [
                 'user' => $this->user,
                 // 'logoUrl' => asset('images/logo2.png'), // Pass the logo URL
@@ -46,6 +46,8 @@ class ThankYouMail extends Mailable
 
     /**
      * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {

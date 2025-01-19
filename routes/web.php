@@ -90,3 +90,18 @@ Route::post('/update-template/{template}', [TemplateController::class, 'update_u
 Route::domain('{subdomain}.digitalStartups.com')->group(function () {
     Route::get('/', [TemplateController::class, 'showUserTemplate'])->name('user.template.preview');
 });
+
+
+
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-email', function () {
+    try {
+        Mail::raw('Hii this is tax seve kendra , thankyou to give your qutation our executive will reach you soon within 48hr', function ($message) {
+            $message->to('alfwasim@gmail.com')->subject('Thankyou for contacting us');
+        });
+        return 'Email sent successfully!';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});

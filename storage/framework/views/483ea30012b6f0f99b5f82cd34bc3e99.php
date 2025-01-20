@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="chse-tmpl w-100 d-block text-center pb-md-3">Choose a Free Stunning Template</div>
 
-                <?php $__currentLoopData = $templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $template): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__empty_1 = true; $__currentLoopData = $templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $template): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div class="col-md-3 col-sm-3 p-md-3 pl-2 pr-3 pt-0 pb-1">
                         <div class="webImg">
                             <div class="webTemp position-relative">
@@ -34,7 +34,14 @@
                             </div>
                         </div>
                     </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                <div class="col-md-3 col-sm-3 p-md-3 pl-2 pr-3 pt-0 pb-1">
+                    No template available
+                </div>
+                <?php endif; ?>
+
+
+
             </div>
 
             

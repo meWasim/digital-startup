@@ -4,9 +4,9 @@
 <title>B.K Tax Preparation Service- Our Blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/032-B.K-Tax-Preparation-Service/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/032-B.K-Tax-Preparation-Service/css/font-awesome.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/032-B.K-Tax-Preparation-Service/css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/css/style1.css">
 </head>
 <body>
 <!---------Start header section----------->
@@ -24,10 +24,10 @@
 
 <!---------End footer section-------->
 
-<script src="http://127.0.0.1:8000/templates-master/032-B.K-Tax-Preparation-Service/js/jquery.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/032-B.K-Tax-Preparation-Service/js/popper.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/032-B.K-Tax-Preparation-Service/js/bootstrap.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/032-B.K-Tax-Preparation-Service/js/jquery.fancybox.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/032-B.K-Tax-Preparation-Service/js/custom.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/jquery.fancybox.min.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/custom.js"></script>
 </body>
 </html> 

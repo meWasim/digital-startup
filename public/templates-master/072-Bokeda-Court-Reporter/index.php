@@ -4,10 +4,10 @@
 <title>Bokeda Court Reporter</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/css/font-awesome.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/css/style1.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/css/imageScroll.css">
+<link rel="stylesheet" href="http://localhost/templates-master/072-Bokeda-Court-Reporter/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/072-Bokeda-Court-Reporter/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/072-Bokeda-Court-Reporter/css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/072-Bokeda-Court-Reporter/css/imageScroll.css">
 </head>
 <body>	
 <!---------Start header section----------->
@@ -52,11 +52,11 @@
 <?php include("include/footer.php"); ?>
 <!---------End footer section-------->
 
-<script src="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/js/jquery.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/js/popper.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/js/bootstrap.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/js/ImageScroll.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/072-Bokeda-Court-Reporter/js/img-scroll.js"></script>
+<script src="http://localhost/templates-master/072-Bokeda-Court-Reporter/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/072-Bokeda-Court-Reporter/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/072-Bokeda-Court-Reporter/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/072-Bokeda-Court-Reporter/js/ImageScroll.js"></script>
+<script src="http://localhost/templates-master/072-Bokeda-Court-Reporter/js/img-scroll.js"></script>
 <script type="text/javascript">
   $('.clint').imageScroll({
     orientation:"left",

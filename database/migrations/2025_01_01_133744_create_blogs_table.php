@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->longText('content'); // Long text for Quill editor
             $table->string('slug')->unique();
-            $table->string('author')->nullable();
+            $table->string('author');
             $table->string('featured_image')->nullable(); // For the uploaded image
             $table->timestamps();
         });

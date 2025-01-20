@@ -4,9 +4,9 @@
 <title>Morina Grocery Store- Our Blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/036-Morina-Grocery-Stores/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/036-Morina-Grocery-Stores/css/font-awesome.css">
-<link rel="stylesheet" href="http://127.0.0.1:8000/templates-master/036-Morina-Grocery-Stores/css/style.css">
+<link rel="stylesheet" href="http://localhost/templates-master/036-Morina-Grocery-Stores/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/036-Morina-Grocery-Stores/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/036-Morina-Grocery-Stores/css/style.css">
 </head>
 <body>
 <!---------Start header section----------->
@@ -24,10 +24,10 @@
 
 <!---------End footer section-------->
 
-<script src="http://127.0.0.1:8000/templates-master/036-Morina-Grocery-Stores/js/jquery.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/036-Morina-Grocery-Stores/js/popper.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/036-Morina-Grocery-Stores/js/bootstrap.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/036-Morina-Grocery-Stores/js/jquery.fancybox.min.js"></script>
-<script src="http://127.0.0.1:8000/templates-master/036-Morina-Grocery-Stores/js/custom.js"></script>
+<script src="http://localhost/templates-master/036-Morina-Grocery-Stores/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/036-Morina-Grocery-Stores/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/036-Morina-Grocery-Stores/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/036-Morina-Grocery-Stores/js/jquery.fancybox.min.js"></script>
+<script src="http://localhost/templates-master/036-Morina-Grocery-Stores/js/custom.js"></script>
 </body>
 </html> 

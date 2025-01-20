@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="col-md-12 col-sm-12">
-                <a href="contact-us.php" class="choseBtn">Contact Us</a>
+                <a href="<?php echo e(route('contact.us')); ?>" class="choseBtn">Contact Us</a>
             </div>
         </div>
     </div>

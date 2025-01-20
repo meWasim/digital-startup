@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Role;
-use App\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -13,6 +13,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (!auth()->user()->can('view-roles')) {
+            return redirect()->back()->with('error', 'Permission denied');
+        }
         $roles = Role::with('permissions')->get(); // Eager load permissions
         return view('role-permission.role.index', compact('roles'));
     }
@@ -22,6 +25,9 @@ class RoleController extends Controller
      */
     public function create()
     {
+        if (!auth()->user()->can('create-roles')) {
+            return redirect()->back()->with('error', 'Permission denied');
+        }
         $permissions = Permission::all(); // Fetch all permissions
         return view('role-permission.role.create', compact('permissions'));
     }
@@ -36,7 +42,11 @@ class RoleController extends Controller
             'permissions' => 'nullable|array',
         ]);
 
-        $role = Role::create($request->only('name'));
+        // Create the role with guard_name set to 'web'
+        $role = Role::create([
+            'name' => $request->name,
+            'guard_name' => 'web',
+        ]);
 
         // Assign permissions to the role
         if ($request->has('permissions')) {
@@ -51,6 +61,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        if (!auth()->user()->can('edit-roles')) {
+            return redirect()->back()->with('error', 'Permission denied');
+        }
         $role = Role::with('permissions')->findOrFail($id);
         $permissions = Permission::all(); // Fetch all permissions
         $assignedPermissions = $role->permissions->pluck('id')->toArray(); // Array of assigned permission IDs
@@ -69,7 +82,10 @@ class RoleController extends Controller
         ]);
 
         $role = Role::findOrFail($id);
-        $role->update($request->only('name'));
+        $role->update([
+            'name' => $request->name,
+            'guard_name' => 'web', // Ensure guard_name is set
+        ]);
 
         // Update permissions assigned to the role
         $role->permissions()->sync($request->permissions ?? []);
@@ -82,6 +98,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+        if (!auth()->user()->can('delete-roles')) {
+            return redirect()->back()->with('error', 'Permission denied');
+        }
         $role = Role::findOrFail($id);
 
         // Detach all permissions before deleting the role

@@ -85,7 +85,7 @@
              <div class="pros w-100 d-block">
                  <h2 class="w-100 d-block text-center pb-2">We Thrive When You Prosper</h2>
                  <p class="w-100 d-block text-center pb-3">Committed to deliver exceptionally high quality professional services by adding value to your business</p>
-                 <a href="discuss-project.php" class="diss">Discuss a Project</a>
+                 <a href="{{route('discuss.project')}}" class="diss">Discuss a Project</a>
              </div>
          </div>
      </div>

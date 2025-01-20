@@ -87,10 +87,21 @@ Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.ad
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::get('/template/{template}/edit', [TemplateController::class, 'edit_template'])->name('template.edit');
 Route::post('/update-template/{template}', [TemplateController::class, 'update_user'])->name('template_section.update');
+Route::get('user/template-preview/{folder}', [CartController::class, 'preview'])->name('user.templates.preview');
+Route::get('user/template-preview/{folder}/service', [CartController::class, 'service_preview'])->name('user.templates.service.preview');
+Route::get('user/template-preview/{folder}/home', [CartController::class, 'home_preview'])->name('user.templates.home.preview');
+Route::get('user/template-preview/{folder}/about-us', [CartController::class, 'about_us_preview'])->name('user.templates.about_us.preview');
+Route::get('user/template-preview/{folder}/contact-us', [CartController::class, 'contact_us_preview'])->name('user.templates.contact_us.preview');
+Route::get('user/template-preview/{folder}/blog', [CartController::class, 'blog_preview'])->name('user.templates.blog.preview');
 Route::domain('{subdomain}.digitalStartups.com')->group(function () {
     Route::get('/', [TemplateController::class, 'showUserTemplate'])->name('user.template.preview');
 });
 
+Route::get('/contactUs', [ContactController::class, 'contactPage'])->name('contact.page');
+Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');
+Route::get('/template/check-edit', [TemplateController::class, 'checkAndEdit'])->name('check.template.edit');
+Route::get('/template/{template_id}/edit-page', [TemplateController::class, 'editPage'])->name('template.edit.page');
+Route::post('/template/{template_id}/update', [TemplateController::class, 'update_template'])->name('template.update');
 
 
 use Illuminate\Support\Facades\Mail;

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
+use App\Models\Header;
+use App\Models\AboutUs;
+use App\Models\Feature;
+use App\Models\Service;
 use App\Models\Template;
 use Illuminate\Http\Request;
 use App\Models\TemplateSection;
@@ -367,12 +372,12 @@ class TemplateController extends Controller
     $template = Template::findOrFail($templateId);
 
     // Retrieve existing template sections
-    $templateSections = TemplateSection::where('template_id', $templateId)
-                                        ->pluck('content', 'section_name')
-                                        ->toArray();
+    $sections = TemplateSection::where('template_id', $templateId)
+                                        ->pluck('content', 'section_name');
 
-    return view('templates.edit_user', compact('template', 'templateSections'));
+    return view('templates.edit_user', compact('template', 'sections'));
 }
+
 
 
 // public function update_user(Request $request, $templateId)
@@ -415,60 +420,35 @@ class TemplateController extends Controller
 
 public function update_user(Request $request, $templateId)
 {
-    $userId = auth()->id(); // Get the authenticated user's ID
-
-    // Validate the incoming request
+    // Validate the CKEditor inputs
     $validated = $request->validate([
-        'sections.*.text' => 'nullable|string',
-        'sections.*.images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Limit size to 2MB
+        'editor-about-us' => 'nullable|string',
+        'editor-services' => 'nullable|string',
+        'editor-blog' => 'nullable|string',
+        'editor-contact-us' => 'nullable|string',
     ]);
 
-    // Loop through each section from the request
-    foreach ($request->input('sections', []) as $sectionKey => $sectionData) {
-        // Fetch the existing section for the user and template
-        $existingSection = TemplateSection::where('user_id', $userId)
-            ->where('template_id', $templateId)
-            ->where('section_name', $sectionKey)
-            ->first();
+    // Section names
+    $sections = [
+        'about-us' => $validated['editor-about-us'] ?? '',
+        'services' => $validated['editor-services'] ?? '',
+        'blog' => $validated['editor-blog'] ?? '',
+        'contact-us' => $validated['editor-contact-us'] ?? '',
+    ];
 
-        $updatedImages = [];
+    // Fetch the Template instance using the provided templateId
+    $template = Template::findOrFail($templateId);
 
-        // Handle uploaded images
-        if (isset($sectionData['images'])) {
-            foreach ($sectionData['images'] as $image) {
-                if ($image instanceof UploadedFile && $image->isValid()) {
-                    // Store the image in the 'public/uploads/sections' directory
-                    $path = $image->store('uploads/sections', 'public');
-                    $updatedImages[] = $path;
-                }
-            }
-        }
-
-        // Merge with existing images if updating
-        if ($existingSection && $existingSection->image) {
-            $existingImages = json_decode($existingSection->image, true) ?: [];
-            $updatedImages = array_merge($existingImages, $updatedImages);
-        }
-
-        // Update or create the section record
-        if ($existingSection) {
-            $existingSection->update([
-                'content' => $sectionData['text'] ?? $existingSection->content,
-                'image' => !empty($updatedImages) ? json_encode($updatedImages) : $existingSection->image,
-            ]);
-        } else {
-            TemplateSection::create([
-                'user_id' => $userId,
-                'template_id' => $templateId,
-                'section_name' => $sectionKey,
-                'content' => $sectionData['text'] ?? null,
-                'image' => !empty($updatedImages) ? json_encode($updatedImages) : null,
-            ]);
-        }
+    // Save each section in the TemplateSection model
+    foreach ($sections as $sectionName => $content) {
+        TemplateSection::updateOrCreate(
+            ['template_id' => $template->id, 'section_name' => $sectionName],
+            ['content' => $content]
+        );
     }
 
-    // Reload the current page with a success message
-    return redirect()->back()->with('success', 'Template updated successfully!');
+    // Redirect with a success message
+    return redirect()->route('cart.view')->with('success', 'Template sections updated successfully!');
 }
 
 
@@ -492,5 +472,132 @@ public function showUserTemplate($subdomain, $templateId)
     }
 
     return response($fileContent);
+}
+
+
+
+public function update_aboutus(Request $request)
+    {
+        $validated = $request->validate([
+            'our_story' => 'nullable|string',
+            'mission' => 'nullable|string',
+            'vision' => 'nullable|string',
+            'image_url' => 'nullable|url',
+        ]);
+
+        // Store the content in the database or file
+        // Example: Using a settings table or JSON file
+        $content = [
+            'our_story' => $validated['our_story'],
+            'mission' => $validated['mission'],
+            'vision' => $validated['vision'],
+            'image_url' => $validated['image_url'],
+        ];
+
+        // Save the $content, e.g., to a database
+        // Assuming there's a `Content` model for storing dynamic content
+        AboutUs::updateOrCreate(['key' => 'about_us'], ['value' => json_encode($content)]);
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'About Us updated successfully.');
+    }
+
+    public function checkAndEdit(Request $request)
+    {
+        $templateId = $request->get('template_id');
+        $userId = $request->get('user_id');
+
+        // Check if the template and user exist in the database
+        $template = Cart::where('template_id', $templateId)
+                            ->where('user_id', $userId)
+                            ->first();
+
+        if ($template) {
+            // Redirect to the edit page with the template ID
+            return redirect()->route('template.edit.page', ['template_id' => $templateId]);
+        }
+
+        return redirect()->back()->with('error', 'Template not found or access denied.');
+    }
+    public function editPage($templateId)
+{
+    $userId = auth()->id();
+    $aboutUs = AboutUs::where('user_id', $userId)
+        ->where('template_id', $templateId)
+        ->first();
+
+    $services = Service::where('user_id', $userId)->where('template_id', $templateId)->get();
+
+    $features = Feature::where('user_id', $userId)
+    ->where('template_id', $templateId)
+    ->get();
+    $header = Header::where('user_id', $userId)
+        ->where('template_id', $templateId)
+        ->first();
+    // Decode menu_links if it exists
+    if ($header && $header->menu_links) {
+        $header->menu_links = json_decode($header->menu_links, true); // Decode JSON into an array
+    }
+
+    // Decode social_links if it exists
+    if ($header && $header->social_links) {
+        $header->social_links = json_decode($header->social_links, true); // Decode JSON into an array
+    }
+    return view('templates.edit-page', compact('header','aboutUs','services','features','templateId'));
+}
+
+public function update_template(Request $request, $templateId)
+{
+    $userId = auth()->id();
+
+    // Handle Header Update or Create
+    $headerData = [
+        'home_url' => $request->header['home_url'],
+        'logo_text' => $request->header['logo_text'],
+        'menu_links' => json_encode($request->header['menu_links']),
+        'social_links' => json_encode($request->header['social_links']),
+        'phone_number' => $request->header['phone_number'],
+    ];
+
+    // If a new logo is uploaded, handle it and update the path
+    if ($request->hasFile('header.logo')) {
+        $logo = $request->file('header.logo');
+        $logoPath = $logo->store('logos', 'public');
+        $headerData['logo'] = $logoPath; // Update with the uploaded logo path
+    }
+
+    Header::updateOrCreate(
+        ['user_id' => $userId, 'template_id' => $templateId],
+        $headerData
+    );
+
+    // Handle About Us Update or Create
+    AboutUs::updateOrCreate(
+        ['user_id' => $userId, 'template_id' => $templateId],
+        $request->only('our_story', 'mission', 'vision')
+    );
+
+    // Handle Services Update
+    Service::where('user_id', $userId)->where('template_id', $templateId)->delete(); // Delete old services
+
+    foreach ($request->services as $serviceData) {
+        $serviceDataToStore = [
+            'user_id' => $userId,
+            'template_id' => $templateId,
+            'title' => $serviceData['title'],
+            'subtitle' => $serviceData['subtitle'],
+        ];
+
+        // If a service image is uploaded, store it and update the path
+        if (isset($serviceData['image']) && $serviceData['image']->isValid()) {
+            $image = $serviceData['image'];
+            $imagePath = $image->store('services', 'public');
+            $serviceDataToStore['image_path'] = $imagePath; // Save the image path
+        }
+
+        Service::create($serviceDataToStore);
+    }
+
+    return redirect()->route('cart.view')->with('success', 'Template updated successfully.');
 }
 }

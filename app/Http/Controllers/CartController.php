@@ -561,7 +561,7 @@ public function preview($templateFolder)
     $services = Service::where('user_id', $userId)->where('template_id', $template->id)->get();
     $testimonials = Testimonial::where('user_id', $userId)->where('template_id', $template->id)->get();
     $feature = Feature::where('user_id', $userId)->where('template_id', $template->id)->get();
-    $contact = ContactTemplate::where('user_id', $userId)->where('template_id', $template->id)->first();
+    // $contact = ContactTemplate::where('user_id', $userId)->where('template_id', $template->id)->first();
     $footer = Footer::where('user_id', $userId)->where('template_id', $template->id)->first();
     $blogPosts = BlogPosts::where('user_id', $userId)->where('template_id', $template->id)->get();
     $header = Header::where('user_id', $userId)->where('template_id', $template->id)->first();

@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>@yield('title', 'Digital Startups')</title>
+    <title><?php echo $__env->yieldContent('title', 'Digital Startups'); ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{ asset('favicon-32x32.png') }}" type="image/png">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/left-menu.css') }}">
+    <link rel="icon" href="<?php echo e(asset('favicon-32x32.png')); ?>" type="image/png">
+    <link rel="stylesheet" href="<?php echo e(asset('css/bootstrap.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/font-awesome.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/left-menu.css')); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -32,14 +32,14 @@
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.16/dist/sweetalert2.all.min.js"></script>
 
-    @stack('styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 
 
 
 <body>
     <div id="wrapper">
-        @include('layouts.partials.sideNav')
+        <?php echo $__env->make('layouts.partials.sideNav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <div id="page-content-wrapper">
             <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
@@ -51,9 +51,9 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-0">
                         <div class="row">
-                            @include('layouts.partials.header')
-                            @yield('content')
-                            @include('layouts.partials.footer')
+                            <?php echo $__env->make('layouts.partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php echo $__env->yieldContent('content'); ?>
+                            <?php echo $__env->make('layouts.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
                     </div>
                 </div>
@@ -63,11 +63,11 @@
 
 
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/ImageScroll.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="<?php echo e(asset('js/jquery.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/popper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/ImageScroll.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/custom.js')); ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var highestBox = 0;
@@ -112,25 +112,25 @@
         });
     </script>
     <script>
-        @if (session('success'))
+        <?php if(session('success')): ?>
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "{{ session('success') }}",
+                title: "<?php echo e(session('success')); ?>",
                 showConfirmButton: false,
                 timer: 1500,
                 toast: true, // Makes it smaller like a toast
             });
-        @elseif (session('error'))
+        <?php elseif(session('error')): ?>
             Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: "{{ session('error') }}",
+                title: "<?php echo e(session('error')); ?>",
                 showConfirmButton: false,
                 timer: 1500,
                 toast: true, // Makes it smaller like a toast
             });
-        @endif
+        <?php endif; ?>
     </script>
     <script>
         function confirmDelete(param) {
@@ -251,7 +251,8 @@
     </script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 
 </html>
+<?php /**PATH C:\Users\Wasim Ansari\OneDrive\Desktop\freework\digitalStartups\resources\views/layouts/app.blade.php ENDPATH**/ ?>

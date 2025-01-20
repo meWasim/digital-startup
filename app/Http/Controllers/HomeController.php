@@ -24,7 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $templates = Template::all();
+        // Get three random templates from the database
+        $templates = Template::inRandomOrder()->take(8)->get();
 
         // Pass the templates to the view
         return view('home', compact('templates'));

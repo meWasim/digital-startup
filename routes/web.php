@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('templates', TemplateController::class);
     });
 });
+Route::get('/search-suggestions', [TemplateController::class, 'getSuggestions'])->name('search.suggestions');
+
 Route::resource('contacts', ContactController::class);
 Route::get('template-preview/{templateFolder}', [TemplateController::class, 'preview'])->name('template.preview');
 // Route::get('template-preview/{templateFolder}', [TemplateController::class, 'preview'])->name('template.preview');
@@ -97,8 +99,8 @@ Route::domain('{subdomain}.digitalStartups.com')->group(function () {
     Route::get('/', [TemplateController::class, 'showUserTemplate'])->name('user.template.preview');
 });
 
-Route::get('/contactUs', [ContactController::class, 'contactPage'])->name('contact.page');
-Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');
+// Route::get('/contactUs', [ContactController::class, 'contactPage'])->name('contact.page');
+// Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');
 Route::get('/template/check-edit', [TemplateController::class, 'checkAndEdit'])->name('check.template.edit');
 Route::get('/template/{template_id}/edit-page', [TemplateController::class, 'editPage'])->name('template.edit.page');
 Route::post('/template/{template_id}/update', [TemplateController::class, 'update_template'])->name('template.update');
@@ -116,3 +118,7 @@ Route::get('/test-email', function () {
         return 'Error: ' . $e->getMessage();
     }
 });
+// routes/web.php
+
+
+

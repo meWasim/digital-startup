@@ -8,11 +8,11 @@
 		 	   <div class="col-md-4 col-sm-4">
 		 	   	    <h3 class="d-block pb-2 mb-3">Useful Links</h3>
 		 	   	    <ul class="usf-link pl-0">
-		 	   	    	<li class="pb-1"><a href="index.php">Home</a></li>
-		 	   	    	<li class="pb-1"><a href="about-us.php">About Us</a></li>
-		 	   	    	<li class="pb-1"><a href="services.php">Service</a></li>
-		 	   	    	<li class="pb-1"><a href="blog.php">Blog</a></li>
-		 	   	    	<li class="pb-1"><a href="contact-us.php">Contact Us</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/015-MX-Video-Production/index.php">Home</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/015-MX-Video-Production/about-us.php">About Us</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/015-MX-Video-Production/services.php">Service</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/015-MX-Video-Production/blog.php">Blog</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/015-MX-Video-Production/contact-us.php">Contact Us</a></li>
 		 	   	    </ul>
 		 	   </div>
 		 	   <div class="col-md-4 col-sm-4">

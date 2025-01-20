@@ -7,7 +7,7 @@
 	 	  	   <div class="servs w-100">
 	 	  	   	    <div class="zoom-effect-container">
 	 	  	   	    	 <div class="image-card">
-	 	  	   	              <img src="images/bed-bug-pest-control.jpg" alt="">
+	 	  	   	              <img src="http://localhost/templates-master/001-robax-pest-control/images/bed-bug-pest-control.jpg" alt="">
 	 	  	   	         </div>
 	 	  	   	    </div>
 	 	  	   	    <div class="bed-bug w-100-d-block p-md-5 p-3">
@@ -20,7 +20,7 @@
 	 	  	   <div class="servs w-100">
 	 	  	   	     <div class="zoom-effect-container">
 	 	  	   	    	  <div class="image-card">
-	 	  	   	                <img src="images/garden-pest-control.jpg" alt="">
+	 	  	   	                <img src="http://localhost/templates-master/001-robax-pest-control/images/garden-pest-control.jpg" alt="">
 	 	  	   	          </div>
 	 	  	   	    </div>
 	 	  	   	    <div class="bed-bug w-100-d-block p-md-5 p-3">
@@ -33,7 +33,7 @@
 	 	  	   <div class="servs w-100">
 	 	  	   	    <div class="zoom-effect-container">
 	 	  	   	    	  <div class="image-card">
-	 	  	   	               <img src="images/termite-pest-control.jpg" alt="">
+	 	  	   	               <img src="http://localhost/templates-master/001-robax-pest-control/images/termite-pest-control.jpg" alt="">
 	 	  	   	          </div>
 	 	  	   	    </div>
 	 	  	   	    <div class="termite w-100-d-block p-md-5 p-3">

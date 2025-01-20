@@ -4,9 +4,9 @@
 <title>Delel Event Planning Company- Services</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/061-Delel-Event-Planning-Company/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/061-Delel-Event-Planning-Company/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/061-Delel-Event-Planning-Company/css/style1.css">
 </head>
 <body>
 <!---------Start header section----------->
@@ -24,10 +24,10 @@
 
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="http://localhost/templates-master/061-Delel-Event-Planning-Company/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/061-Delel-Event-Planning-Company/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/061-Delel-Event-Planning-Company/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/061-Delel-Event-Planning-Company/js/jquery.fancybox.min.js"></script>
+<script src="http://localhost/templates-master/061-Delel-Event-Planning-Company/js/custom.js"></script>
 </body>
 </html> 

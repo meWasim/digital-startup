@@ -4,10 +4,10 @@
 <title>MX Video Production</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/imageScroll.css">
+<link rel="stylesheet" href="http://localhost/templates-master/015-MX-Video-Production/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/015-MX-Video-Production/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/015-MX-Video-Production/css/style.css">
+<link rel="stylesheet" href="http://localhost/templates-master/015-MX-Video-Production/css/imageScroll.css">
 </head>
 <body>	
 <!---------Start header section----------->
@@ -52,11 +52,11 @@
 <?php include("include/footer.php"); ?>
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/ImageScroll.js"></script>
-<script src="js/img-scroll.js"></script>
+<script src="http://localhost/templates-master/015-MX-Video-Production/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/015-MX-Video-Production/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/015-MX-Video-Production/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/015-MX-Video-Production/js/ImageScroll.js"></script>
+<script src="http://localhost/templates-master/015-MX-Video-Production/js/img-scroll.js"></script>
 <script type="text/javascript">
   $('.clint').imageScroll({
     orientation:"left",

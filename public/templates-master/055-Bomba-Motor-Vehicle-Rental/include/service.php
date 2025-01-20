@@ -7,7 +7,7 @@
 	 	  	   <div class="servs w-100">
 	 	  	   	    <div class="zoom-effect-container">
 	 	  	   	    	 <div class="image-card">
-	 	  	   	              <img src="images/img-1.jpg" alt="">
+	 	  	   	              <img src="http://localhost/templates-master/055-Bomba-Motor-Vehicle-Rental/images/img-1.jpg" alt="">
 	 	  	   	         </div>
 	 	  	   	    </div>
 	 	  	   	    <div class="bed-bug w-100-d-block p-md-5 p-3">
@@ -20,7 +20,7 @@
 	 	  	   <div class="servs w-100">
 	 	  	   	     <div class="zoom-effect-container">
 	 	  	   	    	  <div class="image-card">
-	 	  	   	                <img src="images/img-2.jpg" alt="">
+	 	  	   	                <img src="http://localhost/templates-master/055-Bomba-Motor-Vehicle-Rental/images/img-2.jpg" alt="">
 	 	  	   	          </div>
 	 	  	   	    </div>
 	 	  	   	    <div class="bed-bug w-100-d-block p-md-5 p-3">
@@ -33,7 +33,7 @@
 	 	  	   <div class="servs w-100">
 	 	  	   	    <div class="zoom-effect-container">
 	 	  	   	    	  <div class="image-card">
-	 	  	   	               <img src="images/img-3.jpg" alt="">
+	 	  	   	               <img src="http://localhost/templates-master/055-Bomba-Motor-Vehicle-Rental/images/img-3.jpg" alt="">
 	 	  	   	          </div>
 	 	  	   	    </div>
 	 	  	   	    <div class="termite w-100-d-block p-md-5 p-3">

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -68,10 +69,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $subdomain = Str::slug($data['Fname'] . '-' . $data['Lname']);
         return User::create([
             'Fname' => $data['Fname'], // First Name
             'Lname' => $data['Lname'], // Last Name
             'email' => $data['email'], // Email
+            'subdomain' => $subdomain,
             'registration_countrycode' => $data['registration_countrycode'], // Country Code
             'telephone' => $data['telephone'], // Phone Number
             'password' => Hash::make($data['password']), // Encrypted Password

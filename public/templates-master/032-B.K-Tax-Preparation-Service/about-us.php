@@ -4,9 +4,9 @@
 <title>B.K Tax Preparation Service- About Us</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/css/style1.css">
 </head>
 <body>
 <!---------Start header section----------->
@@ -24,10 +24,10 @@
 
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/jquery.fancybox.min.js"></script>
+<script src="http://localhost/templates-master/032-B.K-Tax-Preparation-Service/js/custom.js"></script>
 </body>
 </html> 

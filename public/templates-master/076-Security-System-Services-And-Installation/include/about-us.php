@@ -12,7 +12,7 @@
                <p class="d-block">Since 2000, our mission has remained the same—to provide unparalleled service and allow our work to exceed all expectations of professionalism, integrity, and effectiveness. From the smallest and easiest job to the most strenuous, we make sure that we’re not finished until the satisfaction of our customers is met.</p>
 	 	  </div>
 	 	  <div class="col-md-6 col-sm-6 pr-md-0">
-	 	  	   <img src="images/story-01.jpg" class="img-fluid" alt="">
+	 	  	   <img src="http://localhost/templates-master/076-Security-System-Services-And-Installation/images/story-01.jpg" class="img-fluid" alt="">
 	 	  </div>
 	 </div>
 </div>

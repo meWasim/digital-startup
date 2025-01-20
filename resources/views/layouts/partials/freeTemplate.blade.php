@@ -64,8 +64,7 @@
                         <div
                             class="rupee-sym w-100 d-block text-left position-absolute pl-3">
                             ₹ Free</div>
-                        <div
-                            class="web-demo w-100 d-block text-right position-absolute pr-3">
+                        <div class="web-demo w-100 d-block text-right position-absolute pr-3">
                             <a href="#" class="web-cart ml-2"><i
                                     class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                             <a href="template/016-Startone-Ac-Repair-Service/"

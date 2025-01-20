@@ -4,10 +4,10 @@
 <title>Hamid Tobacco Shop</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style1.css">
-<link rel="stylesheet" href="css/imageScroll.css">
+<link rel="stylesheet" href="http://localhost/templates-master/039-Hamid-Tobacco-Shop/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/039-Hamid-Tobacco-Shop/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/039-Hamid-Tobacco-Shop/css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/039-Hamid-Tobacco-Shop/css/imageScroll.css">
 </head>
 <body>	
 <!---------Start header section----------->
@@ -52,11 +52,11 @@
 <?php include("include/footer.php"); ?>
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/ImageScroll.js"></script>
-<script src="js/img-scroll.js"></script>
+<script src="http://localhost/templates-master/039-Hamid-Tobacco-Shop/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/039-Hamid-Tobacco-Shop/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/039-Hamid-Tobacco-Shop/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/039-Hamid-Tobacco-Shop/js/ImageScroll.js"></script>
+<script src="http://localhost/templates-master/039-Hamid-Tobacco-Shop/js/img-scroll.js"></script>
 <script type="text/javascript">
   $('.clint').imageScroll({
     orientation:"left",

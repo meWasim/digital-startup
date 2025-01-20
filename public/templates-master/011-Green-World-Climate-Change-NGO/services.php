@@ -4,9 +4,9 @@
 <title>Green World Climate Change NGO- Services</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/011-Green-World-Climate-Change-NGO/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/011-Green-World-Climate-Change-NGO/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/011-Green-World-Climate-Change-NGO/css/style1.css">
 </head>
 <body>
 <!---------Start header section----------->
@@ -24,10 +24,10 @@
 
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="http://localhost/templates-master/011-Green-World-Climate-Change-NGO/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/011-Green-World-Climate-Change-NGO/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/011-Green-World-Climate-Change-NGO/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/011-Green-World-Climate-Change-NGO/js/jquery.fancybox.min.js"></script>
+<script src="http://localhost/templates-master/011-Green-World-Climate-Change-NGO/js/custom.js"></script>
 </body>
 </html> 

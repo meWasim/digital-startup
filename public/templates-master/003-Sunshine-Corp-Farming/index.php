@@ -4,10 +4,10 @@
 <title>Sunshine Corp Farming</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/imageScroll.css">
+<link rel="stylesheet" href="http://localhost/templates-master/003-Sunshine-Corp-Farming/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/003-Sunshine-Corp-Farming/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/003-Sunshine-Corp-Farming/css/style.css">
+<link rel="stylesheet" href="http://localhost/templates-master/003-Sunshine-Corp-Farming/css/imageScroll.css">
 </head>
 <body>	
 <!---------Start header section----------->
@@ -52,11 +52,11 @@
 <?php include("include/footer.php"); ?>
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/ImageScroll.js"></script>
-<script src="js/img-scroll.js"></script>
+<script src="http://localhost/templates-master/003-Sunshine-Corp-Farming/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/003-Sunshine-Corp-Farming/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/003-Sunshine-Corp-Farming/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/003-Sunshine-Corp-Farming/js/ImageScroll.js"></script>
+<script src="http://localhost/templates-master/003-Sunshine-Corp-Farming/js/img-scroll.js"></script>
 <script type="text/javascript">
   $('.clint').imageScroll({
     orientation:"left",

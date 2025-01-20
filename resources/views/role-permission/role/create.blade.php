@@ -41,12 +41,16 @@
                     <!-- Permissions Checkbox List -->
                     <div class="mb-3">
                         <label for="permissions" class="form-label">Permissions</label>
-                        @foreach ($permissions as $permission)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}">
-                                <label class="form-check-label">{{ $permission->name }}</label>
-                            </div>
-                        @endforeach
+                        <div class="row">
+                            @foreach ($permissions as $permission)
+                                <div class="col-md-3 col-sm-6 col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}">
+                                        <label class="form-check-label">{{ $permission->name }}</label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
 
                     <!-- Submit and Cancel Buttons -->

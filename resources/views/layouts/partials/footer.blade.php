@@ -1,4 +1,83 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  .banner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Full screen height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Banner content styling */
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    opacity: 1; /* Full opacity for the content */
+}
+
+/* Banner header and description */
+.banner-content h2 {
+    margin-bottom: 10px;
+}
+
+.banner-content p {
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.user-form input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.user-form button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-form button:hover {
+    background-color: #2980b9;
+}
+
+/* Close banner button */
+
+
+
+</style>
+{{-- <div id="banner" class="banner-container">
+    <div class="banner-content">
+        <h2>Welcome! Please fill out the form below.</h2>
+        <p>To continue using our services, we need some basic information from you.</p>
+        <form id="user-form" class="user-form">
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="text" id="contact" name="contact" placeholder="Contact Number" required>
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+</div> --}}
+
 <footer class="red-bg w-100 d-block pt-3 pb-md-5 py-2">
      <div class="container">
 
@@ -6,7 +85,7 @@
              <div class="pros w-100 d-block">
                  <h2 class="w-100 d-block text-center pb-2">We Thrive When You Prosper</h2>
                  <p class="w-100 d-block text-center pb-3">Committed to deliver exceptionally high quality professional services by adding value to your business</p>
-                 <a href="discuss-project.php" class="diss">Discuss a Project</a>
+                 <a href="{{route('discuss.project')}}" class="diss">Discuss a Project</a>
              </div>
          </div>
      </div>
@@ -247,3 +326,28 @@
   </div>
 </div>
 <!---------End model popup----------->
+{{-- <script>
+ $(document).ready(function() {
+    // Initially hide the banner
+    $('.banner-container').hide();
+
+    // Show the banner after 4 seconds
+    setTimeout(function() {
+        $('.banner-container').fadeIn(); // Fade in the banner
+    }, 4000); // 4000 milliseconds = 4 seconds
+
+    // Close the banner when the close button is clicked
+    $('.close-banner').click(function() {
+        $('.banner-container').fadeOut(); // Fade out the banner
+    });
+
+    // Handle form submission (you can customize the form action)
+    $('.user-form').submit(function(e) {
+        e.preventDefault();
+        alert('Form submitted');
+        // You can process the form here
+        $('.banner-container').fadeOut(); // Hide banner after submission
+    });
+});
+
+</script> --}}

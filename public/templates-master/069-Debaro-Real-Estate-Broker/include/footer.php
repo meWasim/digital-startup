@@ -8,11 +8,11 @@
 		 	   <div class="col-md-4 col-sm-4">
 		 	   	    <h3 class="d-block pb-2 mb-3">Useful Links</h3>
 		 	   	    <ul class="usf-link pl-0">
-		 	   	    	<li class="pb-1"><a href="index.php">Home</a></li>
-		 	   	    	<li class="pb-1"><a href="about-us.php">About Us</a></li>
-		 	   	    	<li class="pb-1"><a href="services.php">Service</a></li>
-		 	   	    	<li class="pb-1"><a href="blog.php">Blog</a></li>
-		 	   	    	<li class="pb-1"><a href="contact-us.php">Contact Us</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/069-Debaro-Real-Estate-Broker/index.php">Home</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/069-Debaro-Real-Estate-Broker/about-us.php">About Us</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/069-Debaro-Real-Estate-Broker/services.php">Service</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/069-Debaro-Real-Estate-Broker/blog.php">Blog</a></li>
+		 	   	    	<li class="pb-1"><a href="http://localhost/templates-master/069-Debaro-Real-Estate-Broker/contact-us.php">Contact Us</a></li>
 		 	   	    </ul>
 		 	   </div>
 		 	   <div class="col-md-4 col-sm-4">

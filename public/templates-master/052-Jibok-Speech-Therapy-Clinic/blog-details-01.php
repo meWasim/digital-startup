@@ -4,9 +4,9 @@
 <title>Jibok Speech Therapy Clinic- Our Blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/css/style1.css">
 </head>
 <body>
 <!---------Start header section----------->
@@ -22,7 +22,7 @@
 	 	   	     <div class="blog-dtls">
 	 	   	     	  <h2 class="d-block pb-2">This is your first post</h2>
 	 	   	     	  <dd class="d-block pb-2">Posted on: January 10,2022</dd>
-	 	   	     	  <img src="images/blog-01.jpg" class="mb-4" alt="">
+	 	   	     	  <img src="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/images/blog-01.jpg" class="mb-4" alt="">
 	 	   	     	  <p class="d-block pb-md-2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words.</p>
 	 	   	     	  <p class="d-block pb-md-2">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
 	 	   	     	  <p class="d-block pb-md-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here'.</p>
@@ -52,10 +52,10 @@
 <?php include("include/footer.php"); ?>
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/js/jquery.fancybox.min.js"></script>
+<script src="http://localhost/templates-master/052-Jibok-Speech-Therapy-Clinic/js/custom.js"></script>
 </body>
 </html> 

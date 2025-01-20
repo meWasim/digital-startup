@@ -4,9 +4,9 @@
 <title>Bibon Loan Agency- About Us</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="http://localhost/templates-master/030-Bibon-Loan-Agency/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost/templates-master/030-Bibon-Loan-Agency/css/font-awesome.css">
+<link rel="stylesheet" href="http://localhost/templates-master/030-Bibon-Loan-Agency/css/style1.css">
 </head>
 <body>
 <!---------Start header section----------->
@@ -24,10 +24,10 @@
 
 <!---------End footer section-------->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="http://localhost/templates-master/030-Bibon-Loan-Agency/js/jquery.min.js"></script>
+<script src="http://localhost/templates-master/030-Bibon-Loan-Agency/js/popper.min.js"></script>
+<script src="http://localhost/templates-master/030-Bibon-Loan-Agency/js/bootstrap.min.js"></script>
+<script src="http://localhost/templates-master/030-Bibon-Loan-Agency/js/jquery.fancybox.min.js"></script>
+<script src="http://localhost/templates-master/030-Bibon-Loan-Agency/js/custom.js"></script>
 </body>
 </html> 

@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Template;
 use ZipArchive;
+use App\Models\Template;
+use RecursiveIteratorIterator;
+use Illuminate\Console\Command;
+use RecursiveDirectoryIterator;
+use Illuminate\Support\Facades\Storage;
 
 class UploadTemplatesCommand extends Command
 {
@@ -22,7 +24,7 @@ class UploadTemplatesCommand extends Command
             return;
         }
 
-        $zip = new ZipArchive;
+        $zip = new \ZipArchive;
 
         if ($zip->open($zipPath) === TRUE) {
             $extractBasePath = public_path('templates-master');
@@ -58,19 +60,28 @@ class UploadTemplatesCommand extends Command
                     }
                 }
 
-                // Handle Thumbnail
+                // Update paths in PHP files recursively
+                $this->updatePathsRecursively($templatePath, $folderName);
+
+                // Thumbnail and database handling logic remains unchanged
                 $thumbnailInZip = "$folderName/$folderName.png";
                 $thumbnailName = $this->normalizeThumbnailName($folderName);
 
-                if ($zip->locateName($thumbnailInZip) !== false) {
-                    $newThumbnailPath = public_path("storage/thumbnails/{$thumbnailName}.png");
-                    if (!file_exists(dirname($newThumbnailPath))) {
-                        mkdir(dirname($newThumbnailPath), 0777, true);
-                    }
-                    copy($extractBasePath . DIRECTORY_SEPARATOR . $thumbnailInZip, $newThumbnailPath);
+                $thumbnailsPath = public_path("thumbnails"); // Updated path to public/thumbnails
+                if (!file_exists($thumbnailsPath)) {
+                    mkdir($thumbnailsPath, 0777, true);
+                }
+
+                $homeBannerPath = $templatePath . "/images/home-banner.jpg";
+                if (file_exists($homeBannerPath)) {
+                    $datetime = now()->format('Ymd_His'); // Generate current datetime
+                    $Thumbnail_image = "{$thumbnailName}_{$datetime}.jpg";
+                    $newThumbnailPath = "{$thumbnailsPath}/{$thumbnailName}_{$datetime}.jpg"; // Use datetime in thumbnail name
+
+                    copy($homeBannerPath, $newThumbnailPath); // Use home-banner.jpg as the thumbnail
                     $this->info("Thumbnail saved to: $newThumbnailPath");
                 } else {
-                    $this->warn("Thumbnail not found for: $folderName");
+                    $this->warn("home-banner.jpg not found for: $folderName");
                 }
 
                 // Save to Database
@@ -79,7 +90,7 @@ class UploadTemplatesCommand extends Command
                     [
                         'name' => $folderName,
                         'folder' => $folderName,
-                        'thumbnail' => "thumbnails/{$thumbnailName}.png",
+                        'thumbnail' => "thumbnails/{$Thumbnail_image}",
                         'description' => '', // Optional
                     ]
                 );
@@ -93,6 +104,62 @@ class UploadTemplatesCommand extends Command
             $this->error('Failed to open the ZIP file.');
         }
     }
+
+    /**
+     * Recursively update paths in PHP files, including navigation links.
+     */
+    private function updatePathsRecursively(string $directoryPath, string $folderName)
+    {
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($directoryPath, \RecursiveDirectoryIterator::SKIP_DOTS)
+        );
+
+        foreach ($files as $file) {
+            if ($file->getExtension() === 'php') {
+                $filePath = $file->getPathname();
+                $content = file_get_contents($filePath);
+
+                // Replace CSS, JS, and Image paths
+                $content = preg_replace(
+                    [
+                        '/href="css\/(.*?)"/i', // CSS paths
+                        '/src="js\/(.*?)"/i',  // JS paths
+                        '/src="images\/(.*?)"/i' // Image paths
+                    ],
+                    [
+                        'href="' . asset("templates-master/$folderName/css/$1") . '"',
+                        'src="' . asset("templates-master/$folderName/js/$1") . '"',
+                        'src="' . asset("templates-master/$folderName/images/$1") . '"'
+                    ],
+                    $content
+                );
+
+                // Replace navigation links
+                $content = preg_replace(
+                    [
+                        '/href="index.php"/i',
+                        '/href="about-us.php"/i',
+                        '/href="services.php"/i',
+                        '/href="blog.php"/i',
+                        '/href="contact-us.php"/i'
+                    ],
+                    [
+                        'href="' . asset("templates-master/$folderName/index.php") . '"',
+                        'href="' . asset("templates-master/$folderName/about-us.php") . '"',
+                        'href="' . asset("templates-master/$folderName/services.php") . '"',
+                        'href="' . asset("templates-master/$folderName/blog.php") . '"',
+                        'href="' . asset("templates-master/$folderName/contact-us.php") . '"'
+                    ],
+                    $content
+                );
+
+                // Save updated content back to the file
+                file_put_contents($filePath, $content);
+                $this->info("Updated paths in file: $filePath");
+            }
+        }
+    }
+
 
     /**
      * Normalize the thumbnail name to match the desired format.

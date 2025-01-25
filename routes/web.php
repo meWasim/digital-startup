@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\DiscussProjectController;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -122,3 +123,4 @@ Route::get('/test-email', function () {
 
 
 
+Route::get('/api/domain-status', [ApiController::class, 'getDomainStatus']);

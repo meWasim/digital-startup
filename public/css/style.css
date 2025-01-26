@@ -64,10 +64,21 @@ a:hover {
 }
 
 .dropdown-menu {
-  width: 100% !important;
-  background: #c71c24;
-  padding: 20px;
+  width: 10% !important;
+  background: #2a4a9d;
+  /* padding: 10px; */
   z-index: 99999;
+  text-align: center;
+  
+}
+.dropdown-menu .dropdown-item{
+  width: 100%;
+  color: white;
+  height: 100%;
+
+}
+.dropdown-menu .dropdown-item:hover{
+  color: #000;
 }
 
 a.phone-num {
@@ -207,7 +218,9 @@ ul.login li span {
   color: #fff;
   display: inline-block;
 }
-
+.sign-in-to-right i{
+  color: white;
+}
 .sign-in-to-right dd i {
   font-weight: 700;
 }

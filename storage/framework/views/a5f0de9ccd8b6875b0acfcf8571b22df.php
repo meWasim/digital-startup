@@ -28,7 +28,7 @@
                 <!-- Logo Section -->
                 <div class="col-6 col-md-3 d-flex justify-content-start">
                     <a class="navbar-brand" href="/">
-                        <img src="{{ asset('images/Logo2.png') }}" alt="Logo" class="img-fluid">
+                        <img src="<?php echo e(asset('images/Logo2.png')); ?>" alt="Logo" class="img-fluid">
                     </a>
                 </div>
 
@@ -63,13 +63,13 @@
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('about.us') }}">About Us</a>
+                                    <a class="nav-link" href="<?php echo e(route('about.us')); ?>">About Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('blog') }}">Blog</a>
+                                    <a class="nav-link" href="<?php echo e(route('blog')); ?>">Blog</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('contact.us') }}">Contact Us</a>
+                                    <a class="nav-link" href="<?php echo e(route('contact.us')); ?>">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
@@ -78,39 +78,39 @@
 
                 <!-- User Dropdown Section with Cart next to it -->
                 <div class="col-6 col-md-2 d-flex justify-content-end align-items-center">
-                    @auth
+                    <?php if(auth()->guard()->check()): ?>
                         <!-- Cart Button -->
-                        @can('cart')
-                            <a href="{{ route('cart.view') }}" class="mr-2 btn btn-success btn-sm">
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('cart')): ?>
+                            <a href="<?php echo e(route('cart.view')); ?>" class="mr-2 btn btn-success btn-sm">
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
-                        @endcan
+                        <?php endif; ?>
 
                         <!-- User Dropdown -->
                         <div class="dropdown">
                             <a class="sign-in-to-right dropdown-toggle" id="userDropdown" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                                <span class="d-none d-md-inline">{{ Auth::user()->Fname }}</span>
+                                <span class="d-none d-md-inline"><?php echo e(Auth::user()->Fname); ?></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                {{-- <a class="dropdown-item" href="{{ route('profile') }}">Profile</a> --}}
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                
+                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
+                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                    <?php echo csrf_field(); ?>
                                 </form>
                             </div>
                         </div>
-                    @else
+                    <?php else: ?>
                         <!-- Login Button -->
-                        <a href="{{ route('login') }}" class="sign-in-to-right">
+                        <a href="<?php echo e(route('login')); ?>" class="sign-in-to-right">
                             <i class="fa fa-user-o" aria-hidden="true"></i>
                             <span class="d-none d-md-inline">Login</span>
                         </a>
-                    @endauth
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -156,7 +156,7 @@
             if (query.length > 0) {
                 debounce(() => {
                     $.ajax({
-                        url: "{{ route('search.suggestions') }}", // Dynamic route
+                        url: "<?php echo e(route('search.suggestions')); ?>", // Dynamic route
                         type: "GET",
                         data: { query: query },
                         success: function (data) {
@@ -218,3 +218,4 @@
 </script>
 
 
+<?php /**PATH C:\Users\91911\OneDrive\Desktop\digitalstartup\digital-startup\resources\views/layouts/partials/header.blade.php ENDPATH**/ ?>

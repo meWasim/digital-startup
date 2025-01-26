@@ -36,6 +36,7 @@ class UserWithRoleSeeder extends Seeder
             'delete-blog',
             'contact',
             'discuss-project',
+            'cart',
 
         ];
 
@@ -43,7 +44,8 @@ class UserWithRoleSeeder extends Seeder
             'create-blog',
             'edti-blog',
             'show-blog',
-            'delete-blog'
+            'delete-blog',
+            'cart',
         ];
 
         // Step 2: Create permissions in the database

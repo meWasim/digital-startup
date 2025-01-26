@@ -45,7 +45,7 @@ class UserWithRoleSeeder extends Seeder
             'edti-blog',
             'show-blog',
             'delete-blog',
-            'cart',
+            'cart', 
         ];
 
         // Step 2: Create permissions in the database

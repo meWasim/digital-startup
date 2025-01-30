@@ -16,7 +16,8 @@
                         <div class="webImg">
                             <div class="webTemp position-relative">
                                 <a href="#" class="favourite"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <img src="{{ asset('thumbnails/' . basename($template->thumbnail)) }}" alt="{{ $template->name }}">
+                                <img src="{{ asset('thumbnails/' . basename($template->thumbnail)) }}"
+                                    alt="{{ $template->name }}">
                             </div>
                             <div class="webArea position-relative py-4 px-3">
                                 <div class="title w-100 d-block text-left position-absolute pl-3">
@@ -26,19 +27,21 @@
                                     ₹ Free
                                 </div>
                                 <div class="web-demo w-100 d-block text-right position-absolute pr-3">
-                                    <a class="web-cart ml-2" href="javascript:void(0);" data-template-id="{{ $template->id }}">
+                                    <a class="web-cart ml-2" href="javascript:void(0);"
+                                        data-template-id="{{ $template->id }}">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </a>
                                     {{-- <a href="{{ url('templates/' . $template->folder) }}" class="prev-box" target="_blank">Preview</a> --}}
-                                    <a href="{{ url('template-preview/' . $template->folder) }}" target="_blank" class="prev-box">Preview</a>
+                                    <a href="{{ url('template-preview/' . $template->folder) }}" target="_blank"
+                                        class="prev-box">Preview</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @empty
-                <div class="col-md-3 col-sm-3 p-md-3 pl-2 pr-3 pt-0 pb-1">
-                    No template available
-                </div>
+                    <div class="col-md-3 col-sm-3 p-md-3 pl-2 pr-3 pt-0 pb-1">
+                        No template available
+                    </div>
                 @endforelse
 
 
@@ -52,51 +55,78 @@
     </section>
 
     <script>
-        $(document).ready(function () {
-            // Handling click event on Add to Cart button
-            $('.web-cart').on('click', function () {
-                // Retrieve template ID from the data-template-id attribute
-                var templateId = $(this).data('template-id');
+   $(document).ready(function () {
+    // Handling click event on Add to Cart button
+    $('.web-cart').on('click', function () {
+        // Retrieve template ID from the data-template-id attribute
+        var templateId = $(this).data('template-id');
 
-                // SweetAlert confirmation dialog
+        // SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Add to Cart?',
+            text: 'Do you want to add this template to your cart?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, add to cart!',
+            cancelButtonText: 'No, thanks',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Show a loading spinner
                 Swal.fire({
-                    title: 'Add to Cart?',
-                    text: 'Do you want to add this template to your cart?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, add to cart!',
-                    cancelButtonText: 'No, thanks',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // AJAX request to add to cart
-                        $.ajax({
-                            url: '/add-to-cart',  // Change to your route
-                            method: 'POST',
-                            data: {
-                                template_id: templateId,  // Send template ID
-                                _token: '{{ csrf_token() }}' // CSRF token
-                            },
-                            success: function(response) {
-                                // On success, show confirmation message
-                                Swal.fire(
-                                    'Added!',
-                                    'Template has been added to your cart.',
-                                    'success'
-                                );
-                            },
-                            error: function() {
-                                // On failure, show error message
-                                Swal.fire(
-                                    'Oops...',
-                                    'Something went wrong. Please try again.',
-                                    'error'
-                                );
-                            }
-                        });
+                    title: 'Adding to Cart...',
+                    text: 'Please wait while we add the template to your cart.',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading(); // This displays the loading spinner
                     }
                 });
-            });
+
+                // AJAX request to add to cart
+                $.ajax({
+                    url: '/add-to-cart', // Change to your route
+                    method: 'POST',
+                    data: {
+                        template_id: templateId, // Send template ID
+                        _token: '{{ csrf_token() }}' // CSRF token
+                    },
+                    success: function (response) {
+                        // Close the loading spinner
+                        Swal.close();
+
+                        // On success, show confirmation message with a "Go to Cart" button
+                        Swal.fire({
+                            title: 'Added!',
+                            text: 'Template has been added to your cart.',
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonText: 'Go to Cart',
+                            cancelButtonText: 'Close',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Redirect to the cart page
+                                window.location.href = '{{ route('cart.view') }}';
+                            }
+                        });
+                    },
+                    error: function () {
+                        // Close the loading spinner
+                        Swal.close();
+
+                        // On failure, show error message
+                        Swal.fire(
+                            'Oops...',
+                            'Something went wrong. Please try again.',
+                            'error'
+                        );
+                    }
+                });
+            }
         });
+    });
+});
+
     </script>
     @include('layouts.partials.whyChooseUs')
     @include('layouts.partials.ourService')
@@ -104,4 +134,3 @@
 @endsection
 
 >
-

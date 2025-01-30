@@ -41,7 +41,7 @@ class BlogController extends Controller
     }
 
     public function store(Request $request)
-    {dd($request->all());
+    {
         $author = Auth::user();
 
         $request->validate([

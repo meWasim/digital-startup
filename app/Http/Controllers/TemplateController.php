@@ -14,6 +14,9 @@ use App\Models\TemplateSection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 
 
 class TemplateController extends Controller
@@ -158,32 +161,40 @@ class TemplateController extends Controller
      */
     private function updatePathsRecursively(string $directoryPath, string $folderName)
     {
-        $files = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($directoryPath, \RecursiveDirectoryIterator::SKIP_DOTS)
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($directoryPath, RecursiveDirectoryIterator::SKIP_DOTS)
         );
 
-        foreach ($files as $file) {
+        foreach ($iterator as $file) {
             if ($file->isFile() && $file->getExtension() === 'php') {
                 $filePath = $file->getPathname();
                 $content = file_get_contents($filePath);
 
-                // Replace asset paths for CSS, JS, and images
-                $updatedContent = preg_replace(
-                    [
-                        '/href="css\/(.*?)"/i', // Update CSS paths
-                        '/src="js\/(.*?)"/i',   // Update JS paths
-                        '/src="images\/(.*?)"/i', // Update image paths
-                    ],
-                    [
-                        'href="' . asset("templates-master/$folderName/css/$1") . '"',
-                        'src="' . asset("templates-master/$folderName/js/$1") . '"',
-                        'src="' . asset("templates-master/$folderName/images/$1") . '"',
-                    ],
-                    $content
-                );
+                // Define regex patterns for different asset types
+                $patterns = [
+                    '/href="css\/(.*?)"/i',  // CSS files
+                    '/src="js\/(.*?)"/i',    // JS files
+                    '/src="images\/(.*?)"/i', // Image files
+                    '/href="(index|about-us|services|blog|contact-us)\.php"/i' // Internal page links
+                ];
 
-                // Save the updated content back to the file
-                file_put_contents($filePath, $updatedContent);
+                $replacements = [
+                    'href="<?= asset(\'templates-master/' . $folderName . '/css/$1\'); ?>"',
+                    'src="<?= asset(\'templates-master/' . $folderName . '/js/$1\'); ?>"',
+                    'src="<?= asset(\'templates-master/' . $folderName . '/images/$1\'); ?>"',
+                    'href="<?= asset(\'templates-master/' . $folderName . '/$1.php\'); ?>"'
+                ];
+
+                // Apply the replacements
+                $updatedContent = preg_replace($patterns, $replacements, $content);
+
+                // Only update the file if content has changed
+                if ($updatedContent !== $content) {
+                    file_put_contents($filePath, $updatedContent);
+
+                    // Log updated file
+                    Log::info("Updated asset paths in file: $filePath");
+                }
             }
         }
     }
@@ -602,7 +613,7 @@ class TemplateController extends Controller
     }
     public function getSuggestions(Request $request)
     {
-        
+
         $searchTerm = $request->input('query');
         $suggestions = Template::where('name', 'LIKE', "%{$searchTerm}%")
             ->take(10)

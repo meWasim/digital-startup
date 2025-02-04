@@ -12,7 +12,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\DiscussProjectController;
-
+use App\Http\Controllers\ChatGptController;
 Route::get('/', [HomeController::class, 'index']);
 Auth::routes();
 
@@ -124,3 +124,5 @@ Route::get('/test-email', function () {
 
 
 Route::get('/api/domain-status', [ApiController::class, 'getDomainStatus']);
+
+
